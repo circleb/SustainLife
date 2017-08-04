@@ -2,8 +2,8 @@
   max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  border-top: 1px solid $medium-gray;
   margin-top: rem-calc(60);
+  background-color: $brown;
 }
 
 .footer {
@@ -14,5 +14,31 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
+    li {
+        font-size: .85rem;
+    }
   }
+  h6 {
+      color: $yellow;
+      font-weight: bold;
+      padding-bottom: 1rem;
+  }
+  a {
+      color: $white;
+  }
+  .button {
+      background-color: $yellow;
+      &:hover {
+          background-color: $dark-yellow;
+      }
+  }
+}
+.sub-footer {
+    background-color: $dark-brown;
+    color: $white;
+    padding: .5rem 0;
+    font-size: .85rem;
+    .foot-content {
+        @include grid-row();
+    }
 }

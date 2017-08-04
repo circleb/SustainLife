@@ -2,18 +2,27 @@
 .mobile-menu,
 .site-title-bar {
   @include hide-for(medium);
+  background: $green;
+  .menu-icon {
+      &:after {
+          top: 0.5rem;
+          background: $white;
+          -webkit-box-shadow: 0 7px 0 $white, 0 14px 0 $white;
+          box-shadow: 0 7px 0 $white, 0 14px 0 $white;
+      }
+  }
 }
 
 .desktop-menu,
 .site-navigation .top-bar-left {
   @include show-for(medium);
 }
-
-
-
+.top-bar-left {
+    position: absolute;
+}
 // Site title
-.site-mobile-title a {
-  // placeholder
+.site-mobile-title {
+  float: left;
 }
 
 .site-desktop-title a {
@@ -50,26 +59,52 @@
 
 
 // Tablet and desktop menu
-.desktop-menu {
-
-  // submenu arrow
-  li.is-dropdown-submenu-parent {
-    > a::after {
-      border-color: $accordionmenu-arrow-color transparent transparent;
+.desktop-menu.menu {
+    li a {
+        padding: 1.2rem 1rem;
     }
-    &.active > a::after {
-      border-color: $menu-item-color-active transparent transparent;
+    // submenu arrow
+    li.is-dropdown-submenu-parent {
+        > a::after {
+            border: inset 4px;
+            border-color: $accordionmenu-arrow-color transparent transparent;
+        }
+        &.active > a::after {
+            border-color: $menu-item-color-active transparent transparent;
+        }
     }
-  }
+    ul.is-dropdown-submenu {
+        border-color: transparent;
+    }
 }
+.menu {
+    .site-navigation {
+      @include breakpoint(small only) {
+        padding: 0; // prevents container visibility on small screens
+      }
+    }
 
-.site-navigation {
-  @include breakpoint(small only) {
-    padding: 0; // prevents container visibility on small screens
-  }
+    li {
+        a {
+            &:hover {
+                background: $black-alpha;
+            }
+        }
+    }
+    .active, .current_page_item {
+        a {
+            background: $white-alpha;
+        }
+        ul {
+            a {
+                background: none;
+                &:hover {
+                    background: $black-alpha;
+                }
+            }
+        }
+    }
 }
-
-
 
 // WP post navigation
 .post-navigation {

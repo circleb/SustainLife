@@ -1,0 +1,20 @@
+
+.site-header {
+    background-color: $green;
+    position: relative;
+    z-index: 1;
+
+    .site-navigation {
+        @include grid-row();
+        background-color: none;
+        padding: 0;
+    }
+    a {
+        color: $white;
+    }
+}
+.entry-title {
+    color: $white;
+    margin-top: 0;
+    margin-bottom: 3rem;
+}

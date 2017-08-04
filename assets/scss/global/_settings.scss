@@ -56,12 +56,20 @@ $foundation-palette: (
   warning: #ffae00,
   alert: #cc4b37,
 );
+$light-light-gray: #f8f8f8;
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $white;
+$green: #45543f;
+$yellow: #b89c44;
+$dark-yellow: #92792b;
+$brown: #372a21;
+$dark-brown: #2b211a;
+$black-alpha: rgba(0,0,0,.2);
+$white-alpha: rgba(255,255,255,.2);
+$body-background: $light-light-gray;
 $body-font-color: $black;
 $body-font-family: 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
@@ -211,7 +219,7 @@ $accordion-content-padding: 1rem;
 // -----------------
 
 $accordionmenu-arrows: true;
-$accordionmenu-arrow-color: $primary-color;
+$accordionmenu-arrow-color: $white;
 $accordionmenu-arrow-size: 6px;
 
 // 9. Badge
@@ -613,7 +621,7 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-$topbar-background: $light-gray;
+$topbar-background: $green;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 0.5rem 1rem 0.5rem 0;
 $topbar-input-width: 200px;

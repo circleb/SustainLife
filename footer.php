@@ -17,6 +17,11 @@
 				<?php dynamic_sidebar( 'footer-widgets' ); ?>
 				<?php do_action( 'foundationpress_after_footer' ); ?>
 			</footer>
+			<footer class="sub-footer">
+				<div class="foot-content">
+					© 2017 Ploughshare Institute for Sustainable Culture. All rights reserved
+				</div>
+			</footer>
 		</div>
 
 		<?php do_action( 'foundationpress_layout_end' ); ?>

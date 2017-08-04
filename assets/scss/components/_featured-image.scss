@@ -1,14 +1,22 @@
 .featured-hero {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: rem-calc(100);
+    background-color: $brown;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: rem-calc(100);
 
-  @include breakpoint(medium) {
-    height: rem-calc(200);
-  }
+    @include breakpoint(medium) {
+        height: rem-calc(200);
+    }
 
-  @include breakpoint(xlarge) {
-    height: rem-calc(400);
-  }
+    @include breakpoint(xlarge) {
+        height: rem-calc(400);
+    }
+}
+.hero-no-image {
+    height: rem-calc(60);
+
+    @include breakpoint(medium) {
+        height: rem-calc(200);
+    }
 }
