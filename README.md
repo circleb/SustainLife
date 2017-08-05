@@ -16,7 +16,7 @@ If you have not worked with a Sass-based workflow before, I would recommend read
 
 ### 1. Clone the repository and install with npm
 ```bash
-$ cd my-wordpress-folder/wp-content/themes/SustainLife
+$ cd my-wordpress-folder/wp-content/themes/
 $ git clone https://github.com/circleb/SustainLife.git
 $ cd SustainLife
 $ npm install
