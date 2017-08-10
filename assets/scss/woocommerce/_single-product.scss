@@ -1,0 +1,32 @@
+.woocommerce.single-product {
+    hr.sl-divider {
+        width: 80%;
+        color: $light-gray;
+    }
+    label.sl-label {
+        color: $dark-gray;
+        text-transform: uppercase;
+        font-weight: normal !important;
+    }
+    ul.variations {
+        margin-left: 0;
+        list-style: none;
+    }
+    input, select, textarea {
+        border: 0;
+    }
+    div.product {
+        .woocommerce-tabs {
+            ul.tabs, ul.tabs:before, ul.tabs li, ul.tabs li:before, ul.tabs li:after {
+                padding: 0;
+                border: 0;
+                border-bottom: 0;
+                margin: 0;
+                border-radius: 0;
+                left: 0;
+                right: 0;
+                box-shadow: none;
+            }
+        }
+    }
+}
