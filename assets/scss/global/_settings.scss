@@ -262,11 +262,16 @@ $button-sizes: (
   default: 0.9rem,
   large: 1.25rem,
 );
-$button-palette: $foundation-palette;
+$button-palette: map-merge($foundation-palette, (
+    black: $black,
+    yellow: $yellow,
+    brown: $brown
+)) !default;
 $button-opacity-disabled: 0.25;
 $button-background-hover-lightness: -20%;
 $button-hollow-hover-lightness: -50%;
 $button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+
 
 // 12. Button Group
 // ----------------
