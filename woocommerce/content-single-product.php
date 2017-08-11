@@ -80,5 +80,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 
 </div><!-- #product-<?php the_ID(); ?> -->
-
+<script type="text/javascript">
+$('.product-addon').each(function() {
+  input = $(this).find('input[type=text], input[type=email]');
+  console.log(input[0]);
+});
+</script>
 <?php do_action( 'woocommerce_after_single_product' ); ?>

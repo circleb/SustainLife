@@ -29,4 +29,22 @@
             }
         }
     }
+    .single_variation_wrap {
+        .addon-name {
+            color: $dark-gray;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            &:before {
+                content: '';
+                display: block;
+                margin: 1rem auto;
+                width: 80%;
+                height: 1px;
+                background: $medium-gray;
+            }
+        }
+        .product-addon-first-name h3, .product-addon-last-name h3, .product-addon-phone h3, .product-addon-email-address h3 {
+            display: none;
+        }
+    }
 }
