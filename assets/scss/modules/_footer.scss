@@ -9,6 +9,7 @@
 .footer {
   @include grid-row();
   padding: rem-calc(30) 0;
+  color: $light-light-gray;
 
   ul {
     list-style-type: none;

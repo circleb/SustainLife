@@ -1,25 +1,24 @@
 {
-  "name": "foundationpress",
-  "title": "FoundationPress",
-  "version": "2.9.0",
-  "description": "FoundationPress is a WordPress starter theme based on Foundation 6 by Zurb",
+  "name": "sustainlife",
+  "title": "SustainLife",
+  "version": "0.2.0",
+  "description": "A custom theme for the Ploughshare Institute for Sustainable Culture — SustainLife.org",
   "keywords": [
     "FoundationPress",
     "WordPress",
-    "starter theme",
     "Foundation",
     "semantic",
     "mobile first",
     "customizable",
     "responsive"
   ],
-  "homepage": "http://foundationpress.olefredrik.com/",
-  "bugs": "https://github.com/olefredrik/FoundationPress/issues",
+  "homepage": "http://sustainlife.org/",
+  "bugs": "http://sustainlife.org/",
   "license": "MIT",
   "main": "gulpfile.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/olefredrik/FoundationPress.git"
+    "url": "https://github.com/circleb/SustainLife.git"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.0",

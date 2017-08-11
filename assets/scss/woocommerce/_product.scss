@@ -1,0 +1,25 @@
+$product-padding: 0.75rem;
+ul.products {
+    list-style: none;
+    margin-left: 0;
+
+    li.product {
+        background: $white;
+        border: $product-padding solid $white;
+
+        .ptoduct-item-right {
+            padding-top: $product-padding / 2;
+        }
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0;
+        }
+        .price {
+            @include clearfix;
+        }
+        .button {
+            margin: 0;
+            display: block;
+        }
+    }
+}

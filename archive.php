@@ -17,8 +17,10 @@
 
 get_header(); ?>
 
+<?php get_template_part( 'template-parts/featured-image' ); ?>
+
 <div class="main-wrap" role="main">
-	<article class="main-content">
+	<article class="main-content sidebar-left<?php echo $mainwrapclass; ?>">
 	<?php if ( have_posts() ) : ?>
 
 		<?php /* Start the Loop */ ?>

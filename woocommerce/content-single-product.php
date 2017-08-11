@@ -82,8 +82,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div><!-- #product-<?php the_ID(); ?> -->
 <script type="text/javascript">
 $('.product-addon').each(function() {
-  input = $(this).find('input[type=text], input[type=email]');
-  console.log(input[0]);
+  	input = $(this).find('input[type=text], input[type=email]');
+  	name = $(this).find('h3').text();
+  	input.attr('placeholder', name);
+  	if (input[0]) {
+  		$(this).addClass('addon-2-col');
+	}
 });
 </script>
 <?php do_action( 'woocommerce_after_single_product' ); ?>

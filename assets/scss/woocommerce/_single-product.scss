@@ -17,15 +17,24 @@
     }
     div.product {
         .woocommerce-tabs {
-            ul.tabs, ul.tabs:before, ul.tabs li, ul.tabs li:before, ul.tabs li:after {
-                padding: 0;
-                border: 0;
-                border-bottom: 0;
-                margin: 0;
-                border-radius: 0;
-                left: 0;
-                right: 0;
-                box-shadow: none;
+            ul.tabs {
+                border: none;
+                background: none;
+                li {
+                    padding: 1rem 0.3rem;
+                    &.active {
+                        background: $white;
+                    }
+                }
+            }
+            ul.tabs li a {
+                padding-right: 0.5rem;
+                padding-left: 0.5rem;
+            }
+            .entry-content {
+                h2 {
+                    display: none;
+                }
             }
         }
     }
@@ -45,6 +54,13 @@
         }
         .product-addon-first-name h3, .product-addon-last-name h3, .product-addon-phone h3, .product-addon-email-address h3 {
             display: none;
+        }
+        .addon-2-col {
+            @include grid-column(6);
+
+            input, p {
+                margin-bottom: 0;
+            }
         }
     }
 }

@@ -18,7 +18,8 @@ function sl_remove_product_price() {
     remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_price' );
 }
 
-add_action( 'woocommerce_after_shop_loop_item_title', 'sl_excerpt_in_product_archives', 40 );
-function sl_excerpt_in_product_archives() {
-    the_excerpt();
+add_filter( 'woocommerce_enqueue_styles', 'sl_dequeue_styles' );
+function sl_dequeue_styles( $enqueue_styles ) {
+	unset( $enqueue_styles['woocommerce-general'] );	// Remove the WooCommerce gloss
+	return $enqueue_styles;
 }

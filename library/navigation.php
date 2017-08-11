@@ -83,7 +83,7 @@ if ( ! function_exists( 'foundationpress_breadcrumb' ) ) {
 		$separator  = '&gt;';
 		$id         = 'breadcrumbs';
 		$class      = 'breadcrumbs';
-		$home_title = 'Homepage';
+		$home_title = 'Home';
 
 		// Get the query & post information
 		global $post,$wp_query;
