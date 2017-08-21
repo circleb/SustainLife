@@ -22,13 +22,13 @@ get_header(); ?>
 <div class="main-wrap sidebar-left" role="main">
 	<article class="main-content">
 		<header class="kitchen-sink-header">
-			<h1 class="entry-title"><?php the_archive_title(); ?></h1>
+			<h1 class="entry-title">Testimonials</h1>
 		</header>
 	<?php if ( have_posts() ) : ?>
 
 		<?php /* Start the Loop */ ?>
 		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+			<?php get_template_part( 'template-parts/content', 'testimonial' ); ?>
 		<?php endwhile; ?>
 
 		<?php else : ?>

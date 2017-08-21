@@ -8,7 +8,7 @@ get_header(); ?>
 	<?php /* Start loop */ ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 
-		<div class="main-wrap" role="main">
+		<div class="main-wrap sidebar-left" role="main">
 			<header class="kitchen-sink-header">
 				<h1 class="entry-title"><?php the_title(); ?></h1><hr>
 				<p class="lead">This page includes every single Foundation element so that we can make sure things work together smoothly.</p><hr>
@@ -673,6 +673,7 @@ get_header(); ?>
 					<!-- Reveal -->
 					<h2 id="reveal" class="docs-heading" data-magellan-target="reveal"><a href="#reveal"></a>Reveal</h2>
 					<p><a data-open="exampleModal1">Click me for a basic modal</a></p>
+					<p><a data-open="exampleModal2">Click me for a photo modal</a></p>
 					<p><a data-toggle="exampleModal8">Click me for a full-screen modal</a></p>
 
 						<!-- Basic modal -->
@@ -680,6 +681,14 @@ get_header(); ?>
 					<h2>This is a basic modal</h2>
 					<p class="lead">Using hipster ipsum for dummy text</p>
 					<p>Stumptown direct trade swag hella iPhone post-ironic. Before they sold out blog twee, quinoa forage pour-over microdosing deep v keffiyeh fanny pack. Occupy polaroid tilde, bitters vegan man bun gentrify meggings.</p>
+					<button class="close-button" data-close aria-label="Close reveal" type="button">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+
+						<!-- Photo modal -->
+					<div class="reveal" id="exampleModal2" data-reveal>
+						<img src="http://placeimg.com/1200/800/people" />
 					<button class="close-button" data-close aria-label="Close reveal" type="button">
 						<span aria-hidden="true">&times;</span>
 					</button>

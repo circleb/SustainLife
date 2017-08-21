@@ -84,9 +84,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 $('.product-addon').each(function() {
   	input = $(this).find('input[type=text], input[type=email]');
   	name = $(this).find('h3').text();
+	inputclass = name.replace(/\s/g, '').toLowerCase();
   	input.attr('placeholder', name);
   	if (input[0]) {
-  		$(this).addClass('addon-2-col');
+  		$(this).addClass(inputclass);
 	}
 });
 </script>

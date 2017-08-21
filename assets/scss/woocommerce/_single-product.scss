@@ -55,8 +55,11 @@
         .product-addon-first-name h3, .product-addon-last-name h3, .product-addon-phone h3, .product-addon-email-address h3 {
             display: none;
         }
-        .addon-2-col {
-            @include grid-column(6);
+        .firstname, .lastname, .emailaddress, .phone {
+            width: 50%;
+            float: left;
+            padding-left: 0;
+            padding-right: 0.5rem;
 
             input, p {
                 margin-bottom: 0;

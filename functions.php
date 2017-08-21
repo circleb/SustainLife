@@ -54,5 +54,8 @@ require_once( 'library/responsive-images.php' );
 /** Configure WooCommerce Overrides */
 require_once( 'library/woocommerce.php' );
 
+/** Configure Visual Composer Shortcodes */
+require_once( 'library/visualcomposer.php' );
+
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );

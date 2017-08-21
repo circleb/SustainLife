@@ -8,7 +8,9 @@
 
 get_header(); ?>
 
-<div class="main-wrap" role="main">
+<?php get_template_part( 'template-parts/featured-image' ); ?>
+
+<div class="main-wrap sidebar-left" role="main">
 
 <?php do_action( 'foundationpress_before_content' ); ?>
 

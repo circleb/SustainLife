@@ -14,10 +14,10 @@ get_header(); ?>
 
 	<article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>">
 		<header>
-			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<h1 class="entry-title">Shop</h1>
 		</header>
-<?php do_action( 'foundationpress_before_content' ); ?>
-<?php while ( woocommerce_content() ) : the_post(); ?>
+		<?php do_action( 'foundationpress_before_content' ); ?>
+		<?php while ( woocommerce_content() ) : the_post(); ?>
 		<?php do_action( 'foundationpress_page_before_entry_content' ); ?>
 		<div class="entry-content">
 			<?php the_content(); ?>
@@ -25,12 +25,12 @@ get_header(); ?>
 		<?php do_action( 'foundationpress_page_before_comments' ); ?>
 		<?php comments_template(); ?>
 		<?php do_action( 'foundationpress_page_after_comments' ); ?>
-<?php endwhile;?>
-</article>
+		<?php endwhile;?>
+	</article>
 
-<?php do_action( 'foundationpress_after_content' ); ?>
+	<?php do_action( 'foundationpress_after_content' ); ?>
 
-<?php get_sidebar(); ?>
+	<?php get_sidebar(); ?>
 
 </div>
 <?php get_footer();
