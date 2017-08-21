@@ -4,7 +4,7 @@ Template Name: Front
 */
 get_header(); ?>
 
-	<div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+	<div class="home-slider orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
 		<?php if( have_rows('slides') ): ?>
 			<div class="orbit-wrapper">
 				<div class="orbit-controls">

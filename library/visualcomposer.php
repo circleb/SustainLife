@@ -8,7 +8,6 @@ vc_map( array(
      array(
          'type' => 'textfield',
          'heading' => 'Category ID',
-         'value' => 17,
          'param_name' => 'category',
      )
    )
@@ -18,36 +17,50 @@ add_shortcode( 'sl-catslider', 'sl_catslider_handler' );
 
 function sl_catslider_handler( $atts, $content = null ) {
     extract(shortcode_atts(array(
-        "category" => 'CatID'
+        "category" => '21'
     ), $atts));
-
+    $sct = 1;
+    $pct = 1;
     $categories = get_categories(array('taxonomy' => 'product_cat', 'parent' => $category));
 
-    $html = '<div class="ecommerce-product-slider orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+    $html = '<div class="product-category-slider orbit" data-orbit>
                 <ul class="orbit-container">
-                    <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
-                    <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
                     <li class="is-active orbit-slide">
-                    <div class="row small-up-2 medium-up-4 large-up-5 align-center">';
+                    <div class="row small-up-2 medium-up-3 align-center">';
 
                 foreach( $categories as $category ) {
+                    $catid = $category->term_id;
+                    $subcategories = get_categories(array('taxonomy' => 'product_cat', 'parent' => $catid));
+                    if ($sct == 4) {
+                        ++$pct;
+                        $sct = 1;
+                        $html .= '</div>
+                        </li>
+                        <li class="is-active orbit-slide">
+                        <div class="row small-up-2 medium-up-3 align-center">';
+                    }
                     $html .= '
                     <div class="column">
-                        <div class="product-card">
-                            <div class="product-card-thumbnail">
-                                <img src="http://placehold.it/180x180"/>
+                        <div class="category-card">
+                            <div class="category-card-thumbnail">
+                                <img src="http://placehold.it/310x310"/>
                             </div>
-                            <h3 class="product-card-title"><a href="'. get_term_link($category->slug, 'product_cat') .'">' . $category->name . '</a></h3>
+                            <div class="category-card-info">
+                                <h3><a href="'. get_term_link($category->slug, 'product_cat') .'">' . $category->name . '</a></h3>';
+                                foreach( $subcategories as $subcategory ) {
+                                    $html .= '<p><a href="'. get_term_link($subcategory->slug, 'product_cat') .'">' . $subcategory->name . '</a></p>';
+                                }
+                    $html .= '</div>
                         </div>
                     </div>';
+                    ++$sct;
                 }
-    $html .= '</li>
-        </ul>
-        <nav class="orbit-bullets">
-            <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
-            <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
-        </nav>
-    </div>';
+    $html .= '</div></li>';
+    if ($pct > 1) {
+        $html .= '<div class="orbit-controls"><button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+        <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button></div>';
+    }
+    $html .= '</ul></div>';
 
 return $html;
 
