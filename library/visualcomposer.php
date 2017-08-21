@@ -22,8 +22,10 @@ function sl_catslider_handler( $atts, $content = null ) {
     $sct = 1;
     $pct = 1;
     $categories = get_categories(array('taxonomy' => 'product_cat', 'parent' => $category));
+    $catinfo = get_term( $category );
 
-    $html = '<div class="product-category-slider orbit" data-orbit>
+    $html = '<h2 class="product-category-slider-title">' . $catinfo->name . '</h2>';
+    $html .= '<div class="product-category-slider orbit" data-orbit>
                 <ul class="orbit-container">
                     <li class="is-active orbit-slide">
                     <div class="row small-up-2 medium-up-3 align-center">';
@@ -31,6 +33,9 @@ function sl_catslider_handler( $atts, $content = null ) {
                 foreach( $categories as $category ) {
                     $catid = $category->term_id;
                     $subcategories = get_categories(array('taxonomy' => 'product_cat', 'parent' => $catid));
+                    $thumbnail_id = get_woocommerce_term_meta( $catid, 'thumbnail_id', true );
+                    $image = wp_get_attachment_image( $thumbnail_id, array(310,310) );
+
                     if ($sct == 4) {
                         ++$pct;
                         $sct = 1;
@@ -43,7 +48,7 @@ function sl_catslider_handler( $atts, $content = null ) {
                     <div class="column">
                         <div class="category-card">
                             <div class="category-card-thumbnail">
-                                <img src="http://placehold.it/310x310"/>
+                                ' . $image . '
                             </div>
                             <div class="category-card-info">
                                 <h3><a href="'. get_term_link($category->slug, 'product_cat') .'">' . $category->name . '</a></h3>';
