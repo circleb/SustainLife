@@ -39,17 +39,22 @@
 
                 }
                 .category-card-info {
-                    transition: top 500ms;
+                    transition: opacity 500ms;
                     background: rgba(0,0,0,.7);
                     position: absolute;
-                    top: 100%;
+                    top: 0;
                     right: 0;
                     bottom: 0;
                     left: 0;
                     padding: 2rem 1rem;
+                    opacity: 0;
 
                     a {
                         color: $white;
+                    }
+                    p {
+                        margin-bottom: 0;
+                        line-height: 1;
                     }
                     h3 {
                         font-size: 1.5rem;
@@ -57,7 +62,7 @@
                 }
                 &:hover {
                     .category-card-info {
-                        top: 0;
+                        opacity: 1;
                     }
                 }
             }
