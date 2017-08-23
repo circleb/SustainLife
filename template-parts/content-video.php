@@ -10,12 +10,8 @@
 
 ?>
 
-<div id="post-<?php the_ID(); ?>" <?php post_class('blogpost-entry'); ?>>
-	<header>
-		<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-		<?php foundationpress_entry_meta(); ?>
-	</header>
-	<div class="entry-content embed-container">
+<div id="post-<?php the_ID(); ?>" <?php post_class('video-entry'); ?>>
+	<div class="entry-content">
 		<?php
 		// get iframe HTML
 		$iframe = get_field('video_url');
@@ -33,6 +29,7 @@
 		// echo $iframe; ?>
 	</div>
 	<footer>
+		<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 		<?php $tag = get_the_tags(); if ( $tag ) { ?><p><?php the_tags(); ?></p><?php } ?>
 	</footer>
 </div>
