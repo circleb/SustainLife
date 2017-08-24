@@ -38,11 +38,18 @@ get_header(); ?>
 				?>
 			</div>
 		</header>
-		<?php if ( have_posts() ) : ?>
+		<?php
+		  $archive_args = array(
+			  post_type => 'video',
+			  'posts_per_page'=> -1   // this will display all posts on one page
+		  );
+		  $archive_query = new WP_Query( $archive_args );
+		?>
+		<?php if ( $archive_query->have_posts() ) : ?>
 			<div class="row video-masonry-container small-up-2 medium-up-3 align-center">
 
 				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
+				<?php while ( $archive_query->have_posts() ) : $archive_query->the_post(); // run the custom loop ?>
 					<div class="column">
 						<?php get_template_part( 'template-parts/content', 'video' ); ?>
 					</div>
