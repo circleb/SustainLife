@@ -57,5 +57,16 @@ require_once( 'library/woocommerce.php' );
 /** Configure Visual Composer Shortcodes */
 require_once( 'library/visualcomposer.php' );
 
+// add_action( 'pre_get_posts', 'custom_query_vars' );
+// function custom_query_vars( $query ) {
+//   if ( !is_admin() && $query->is_main_query() {
+//     if ( get_post_type() == 'videos' ) {
+//       $query->set( 'posts_per_page' => -1 );
+//     }
+//   }
+//   return $query;
+// }
+
+
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
