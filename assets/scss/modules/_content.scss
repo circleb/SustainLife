@@ -35,8 +35,31 @@
   }
 }
 .video-entry {
+    background: $white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    h4 {
+        margin-top: 1rem;
+        font-size: 1.3rem;
+    }
+    footer {
+        position: relative;
+    }
     .entry-content {
         padding: 0;
+    }
+    .excerpt p {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+    }
+    .video-time {
+        font-size: 0.7rem;
+        background: $light-light-gray;
+        padding: 0.1rem 0.4rem;
+        position: absolute;
+        top: -0.9rem;
+        right: 0;
     }
 }
 

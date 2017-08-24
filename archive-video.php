@@ -18,29 +18,9 @@
 get_header(); ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>
-<style>
-	.embed-container {
-		position: relative;
-		padding-bottom: 56.25%;
-		height: 0;
-		overflow: hidden;
-		max-width: 100%;
-		height: auto;
-	}
-
-	.embed-container iframe,
-	.embed-container object,
-	.embed-container embed {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
 <div class="main-wrap sidebar-left" role="main">
 	<article class="main-content">
-		<header class="kitchen-sink-header">
+		<header>
 			<h1 class="entry-title">Video Courses</h1>
 		</header>
 		<?php if ( have_posts() ) : ?>
@@ -75,5 +55,15 @@ get_header(); ?>
 	<?php get_sidebar(); ?>
 
 </div>
+
+<script>
+$(document).ready(function(){
+	$('.row').masonry({
+		itemSelector: '.column',
+		columnWidth: '.column',
+		percentPosition: true
+	});
+});
+</script>
 
 <?php get_footer();
