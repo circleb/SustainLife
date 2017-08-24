@@ -22,9 +22,24 @@ get_header(); ?>
 	<article class="main-content">
 		<header>
 			<h1 class="entry-title">Video Courses</h1>
+			<div class="small button-group taxonomy-filter">
+				<a class="hollow button">All</a>
+				<?php
+					$args = array (
+					    'taxonomy' => 'video_category', //your custom post type
+					    'orderby' => 'name',
+					    'order' => 'ASC'
+					);
+					$taxonomies = get_categories( $args );
+					foreach ($taxonomies as $taxonomy) {
+					    echo '<a class="hollow button">' . $taxonomy->name . '</a>';
+					    $post_by_cat = get_posts(array('video_category' => $taxonomy->term_id));
+					}
+				?>
+			</div>
 		</header>
 		<?php if ( have_posts() ) : ?>
-			<div class="row small-up-2 medium-up-3 align-center">
+			<div class="row video-masonry-container small-up-2 medium-up-3 align-center">
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( have_posts() ) : the_post(); ?>
@@ -50,7 +65,14 @@ get_header(); ?>
 				<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
 			</nav>
 		<?php endif; ?>
-
+		<div class="large reveal" id="videoModal" data-reveal>
+			<div class="embed-container">
+				<iframe src="" frameborder="0" allowfullscreen></iframe>
+			</div>
+		  	<button class="close-button" data-close aria-label="Close modal" type="button">
+		    	<span aria-hidden="true">&times;</span>
+		  	</button>
+		</div>
 	</article>
 	<?php get_sidebar(); ?>
 
@@ -58,10 +80,27 @@ get_header(); ?>
 
 <script>
 $(document).ready(function(){
-	$('.row').masonry({
+	var $grid = $('.video-masonry-container').masonry({
 		itemSelector: '.column',
 		columnWidth: '.column',
 		percentPosition: true
+	});
+	$('.column').each(function( index ) {
+	  	var taxonomy = $( this ).find('.label').text();
+		$(this).addClass(taxonomy.toLowerCase().replace(/\s/g,'') + ' all');
+	});
+	$('.taxonomy-filter .button').on('click', function() {
+		var taxonomy = $(this).text().toLowerCase().replace(/\s/g,'');
+	  	$('.column').hide();
+		$('.column.'+taxonomy).show();
+		$grid.masonry();
+	});
+	$('.video-thumb, .video-play').on('click', function() {
+		var vidID = $(this).data('id');
+		$("#videoModal iframe").attr("src", "https://www.youtube.com/embed/" + vidID + "?autoplay=1" );
+	});
+	$(document).on('closed.zf.reveal', '[data-reveal]', function() {
+		$("#videoModal iframe").attr("src", "" );
 	});
 });
 </script>

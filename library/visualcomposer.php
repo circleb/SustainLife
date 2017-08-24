@@ -52,8 +52,18 @@ function sl_catslider_handler( $atts, $content = null ) {
                             </div>
                             <div class="category-card-info">
                                 <h3><a href="'. get_term_link($category->slug, 'product_cat') .'">' . $category->name . '</a></h3>';
-                                foreach( $subcategories as $subcategory ) {
-                                    $html .= '<p><a href="'. get_term_link($subcategory->slug, 'product_cat') .'">' . $subcategory->name . '</a></p>';
+                                if (!empty($subcategories)) {
+                                    foreach( $subcategories as $subcategory ) {
+                                        $html .= '<p><a href="'. get_term_link($subcategory->slug, 'product_cat') .'">' . $subcategory->name . '</a></p>';
+                                    }
+                                } else {
+                                    $args = array( 'post_type' => 'product', 'posts_per_page' => -1, 'product_cat' => $category->name );
+                                    $loop = new WP_Query( $args );
+                                    while ( $loop->have_posts() ) : $loop->the_post();
+                                        global $product;
+                                        $html .= '<p><a href="'.get_permalink().'">' . get_the_title() . '</a></p>';
+                                    endwhile;
+                                    wp_reset_query();
                                 }
                     $html .= '</div>
                         </div>

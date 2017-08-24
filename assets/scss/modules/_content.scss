@@ -46,6 +46,9 @@
     footer {
         position: relative;
     }
+    img {
+        cursor: pointer;
+    }
     .entry-content {
         padding: 0;
     }
@@ -60,6 +63,14 @@
         position: absolute;
         top: -0.9rem;
         right: 0;
+    }
+    .video-play {
+        cursor: pointer;
+        position: absolute;
+        left: 50%;
+        margin-left: -2rem;
+        top: 3rem;
+        color: $white;
     }
 }
 

@@ -16,6 +16,7 @@
 		$iframe = get_field('video_url');
 		preg_match('/src="(.+?)"/', $iframe, $matches);
 		$src = $matches[1];
+		$terms = get_the_terms( get_the_ID(), 'video_category' );
 
 		if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $src, $match)) {
 		    $vidkey = $match[1];
@@ -33,14 +34,19 @@
 		if ( has_post_thumbnail() ) {
 		    the_post_thumbnail();
 		} else {
-			echo '<img src="http://i3.ytimg.com/vi/' . $vidkey . '/maxresdefault.jpg"/>';
+			echo '<img class="video-thumb" data-open="videoModal" data-id="' . $vidkey . '" src="http://i3.ytimg.com/vi/' . $vidkey . '/maxresdefault.jpg"/>';
 		}
 		?>
+		<i class="fa fa-play-circle-o fa-4x video-play" data-open="videoModal" data-id="<?php echo $vidkey; ?>"></i>
 	</div>
 	<footer>
 		<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
 		<span class="video-time <?php echo ($VidDuration) ?: 'hide'; ?>"><?php echo $VidDuration; ?></span>
 		<span class="excerpt"><?php the_excerpt(); ?></span>
-		<?php $tag = get_the_tags(); if ( $tag ) { ?><p><?php the_tags(); ?></p><?php } ?>
+		<?php
+		foreach ( $terms as $term ) {
+			echo '<span class="label">' . $term->name . '</span>';
+		}
+		$tag = get_the_tags(); if ( $tag ) { ?><p><?php the_tags(); ?></p><?php } ?>
 	</footer>
 </div>
