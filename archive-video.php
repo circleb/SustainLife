@@ -40,8 +40,10 @@ get_header(); ?>
 		</header>
 		<?php
 		  $archive_args = array(
-			  post_type => 'video',
-			  'posts_per_page'=> -1   // this will display all posts on one page
+			  'orderby' => 'name',
+			  'order' => 'ASC',
+			  'post_type' => 'video',
+			  'posts_per_page'=> -1
 		  );
 		  $archive_query = new WP_Query( $archive_args );
 		?>
@@ -55,17 +57,11 @@ get_header(); ?>
 					</div>
 				<?php endwhile; ?>
 
-				<?php else : ?>
-					<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-				<?php endif; // End have_posts() check. ?>
 			</div>
-			<nav id="post-nav">
-				<div class="post-previous"><?php next_posts_link( __( '&larr; Older posts', 'foundationpress' ) ); ?></div>
-				<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
-			</nav>
-		<?php endif; ?>
-		<div class="large reveal" id="videoModal" data-reveal>
+		<?php else : ?>
+			<?php get_template_part( 'template-parts/content', 'none' ); ?>
+		<?php endif; // End have_posts() check. ?>
+		<div class="large reveal" id="videoModal" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-up">
 			<div class="embed-container">
 				<iframe src="" frameborder="0" allowfullscreen></iframe>
 			</div>
