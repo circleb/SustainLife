@@ -5,6 +5,8 @@
 .product-category-slider.orbit {
     .orbit-container {
         outline: none;
+        min-height: 284px;
+
         .orbit-controls {
             button {
                 background: $yellow;
@@ -46,18 +48,24 @@
                     right: 0;
                     bottom: 0;
                     left: 0;
-                    padding: 2rem 1rem;
+                    padding: 2rem 2.5rem;
                     opacity: 0;
+                    overflow-y: scroll;
 
                     a {
                         color: $white;
                     }
                     p {
-                        margin-bottom: 0;
+                        margin-bottom: 1rem;
+                        margin-top: 0.2rem;
+                        padding: 0.3rem 0.6rem;
                         line-height: 1.4;
+                        border: 1px solid #ffffff;
+                        display: inline-block;
                     }
                     h3 {
-                        font-size: 1.5rem;
+                        font-size: 1.75rem;
+                        font-weight: bolder;
                     }
                 }
                 &:hover {

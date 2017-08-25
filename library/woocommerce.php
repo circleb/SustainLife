@@ -23,3 +23,12 @@ function sl_dequeue_styles( $enqueue_styles ) {
 	unset( $enqueue_styles['woocommerce-general'] );	// Remove the WooCommerce gloss
 	return $enqueue_styles;
 }
+
+function woocommerce_template_loop_category_title( $category ) {
+    echo '<h2 class="woocommerce-loop-category__title">';
+        echo $category->name;
+        if ( $category->count > 0 ) {
+            echo apply_filters( 'woocommerce_subcategory_count_html', ' <span class="badge secondary float-right">' . $category->count . '</span>', $category );
+        }
+    echo '</h2>';
+}
