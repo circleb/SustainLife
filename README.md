@@ -2,6 +2,9 @@
 
 This is a theme for WordPress based on Foundation 6, the most advanced responsive (mobile-first) framework in the world. And is based on FoundationPress
 
+## Notes
+Forked project from circleb to mpressly so I can make edits.
+
 ## Requirements
 
 **This project requires [Node.js](http://nodejs.org) v4.x.x to v6.9.x to be installed on your machine.** Please be aware that you will most likely encounter problems with the installation if you are using v7.1.0 with all the latest features.
