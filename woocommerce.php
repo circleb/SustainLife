@@ -14,7 +14,11 @@ get_header(); ?>
 
 	<article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>">
 		<header>
-			<h1 class="entry-title">Shop</h1>
+			<?php if ( is_archive() ) { ?>
+			<h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
+			<?php } else { ?>
+			<h1 class="entry-title"><?php the_title(); ?></h1>
+			<?php } ?>
 		</header>
 		<?php do_action( 'foundationpress_before_content' ); ?>
 		<?php while ( woocommerce_content() ) : the_post(); ?>
