@@ -18,30 +18,33 @@
 		$src = $matches[1];
 		$terms = get_the_terms( get_the_ID(), 'video_category' );
 
-		if (preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $src, $match)) {
-		    $vidkey = $match[1];
-		}
+		if ( get_field('is_multiple_video_course') ) {
+			$vidkey = get_field('playlist_id');
+			$vidurl = 'videoseries?list=' . $vidkey;
+			$VidDuration =  count( get_field('subvideo_details') ) . ' videos';
 
-		$apikey = "AIzaSyCoyyasLfCrwTbG52SAj9nCa0NyNlXWpUc" ;
-		$contentDetails = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=$vidkey&key=$apikey");
-		$VidDetails = json_decode($contentDetails, true);
-		foreach ($VidDetails['items'] as $video) {
-			$VidDuration = $video['contentDetails']['duration'];
-			$start = new DateTime('@0'); // Unix epoch
-			$start->add(new DateInterval($VidDuration));
-			$VidDuration = $start->format('i:s');
-		}
-		if ( has_post_thumbnail() ) {
 		    the_post_thumbnail();
 		} else {
-			echo '<img class="video-thumb" data-open="videoModal" data-id="' . $vidkey . '" src="http://i3.ytimg.com/vi/' . $vidkey . '/maxresdefault.jpg"/>';
+			$vidkey = get_field('youtube_video_id');
+			$vidurl = $vidkey . '?autoplay=1';
+			$apikey = "AIzaSyCoyyasLfCrwTbG52SAj9nCa0NyNlXWpUc" ;
+			$contentDetails = file_get_contents("https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id=$vidkey&key=$apikey");
+			$VidDetails = json_decode($contentDetails, true);
+			foreach ($VidDetails['items'] as $video) {
+				$VidDuration = $video['contentDetails']['duration'];
+				$start = new DateTime('@0'); // Unix epoch
+				$start->add(new DateInterval($VidDuration));
+				$VidDuration = $start->format('i:s');
+			}
+
+			echo '<img class="video-thumb" data-open="videoModal" data-id="' . $vidurl . '" src="http://i3.ytimg.com/vi/' . $vidkey . '/maxresdefault.jpg"/>';
 		}
 		?>
-		<i class="fa fa-play-circle-o fa-4x video-play" data-open="videoModal" data-id="<?php echo $vidkey; ?>"></i>
+		<i class="fa fa-play-circle-o fa-4x video-play" data-open="videoModal" data-id="<?php echo $vidurl; ?>"></i>
 	</div>
 	<footer>
 		<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-		<span class="video-time <?php echo ($VidDuration) ?: 'hide'; ?>"><?php echo $VidDuration; ?></span>
+		<span class="video-time"><?php echo $VidDuration; ?></span>
 		<span class="excerpt"><?php the_excerpt(); ?></span>
 		<?php
 		foreach ( $terms as $term ) {
