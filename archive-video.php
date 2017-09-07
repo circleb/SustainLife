@@ -93,7 +93,7 @@ $(document).ready(function(){
 	});
 	$('.video-thumb, .video-play').on('click', function() {
 		var vidID = $(this).data('id');
-		$("#videoModal iframe").attr("src", "https://www.youtube.com/embed/" + vidID + "?autoplay=1" );
+		$("#videoModal iframe").attr("src", "https://www.youtube.com/embed/" + vidID );
 	});
 	$(document).on('closed.zf.reveal', '[data-reveal]', function() {
 		$("#videoModal iframe").attr("src", "" );
