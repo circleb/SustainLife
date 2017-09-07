@@ -75,7 +75,7 @@ get_header(); ?>
 </div>
 
 <script>
-$(document).load(function(){
+$(window).load(function(){
 	var $grid = $('.video-masonry-container').masonry({
 		itemSelector: '.column',
 		columnWidth: '.column',
