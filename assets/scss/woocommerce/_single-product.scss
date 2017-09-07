@@ -20,16 +20,30 @@
             ul.tabs {
                 border: none;
                 background: none;
+                margin: 0;
                 li {
-                    padding: 1rem 0.3rem;
+                    border: none;
+                    border-radius: 0;
+                    margin-right: 2px;
+                    a {
+                        padding-right: 0.5rem;
+                        padding-left: 0.5rem;
+                    }
                     &.active {
                         background: $white;
                     }
+                    &:before, &:after {
+                        border-radius: 0;
+                        border-width: 0;
+                        box-shadow: 0;
+                    }
+                }
+                &:before {
+                    border-bottom: none;
                 }
             }
-            ul.tabs li a {
-                padding-right: 0.5rem;
-                padding-left: 0.5rem;
+            .panel {
+                padding: 4rem 5rem;
             }
             .entry-content {
                 h2 {
