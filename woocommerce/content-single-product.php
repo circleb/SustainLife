@@ -98,5 +98,41 @@ $('.product-addon').each(function() {
   		$(this).addClass(inputclass);
 	}
 });
+$(document).ready(function () {
+	$.fn.resizeText = function () {
+	    var width = $(this).innerWidth();
+	    var height = $(this).innerHeight();
+	    var newElem = $("<div>", {
+	        html: $(this).html(),
+	        style: "display: inline-block;overflow:hidden;font-size:0.1em;padding:0;margin:0;border:0;outline:0"
+	    });
+
+	    $(this).html(newElem);
+	    $.resizeText.increaseSize(10, 0.1, newElem, width, height);
+	}
+
+	$.resizeText = {
+	    increaseSize: function (increment, start, newElem, width, height) {
+	        var fontSize = start;
+
+	        while (newElem.outerWidth() <= width && newElem.outerHeight() <= height) {
+	            fontSize += increment;
+	            newElem.css("font-size", fontSize + "em");
+	        }
+
+	        if (newElem.outerWidth() > width || newElem.outerHeight() > height) {
+	            fontSize -= increment;
+	            newElem.css("font-size", fontSize + "em");
+	            if (increment > 0.1) {
+	                $.resizeText.increaseSize(increment / 10, fontSize, newElem, width, height);
+	            }
+	        }
+	    }
+	};
+	var element = $(".entry-title")[0];
+	if (element.offsetWidth < element.scrollWidth) {
+		$(".entry-title").resizeText();
+	}
+});
 </script>
 <?php do_action( 'woocommerce_after_single_product' ); ?>
