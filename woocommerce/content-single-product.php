@@ -48,7 +48,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 
 	<div class="summary entry-summary">
-
+		<?php
+			$args = array(
+				'delimiter' => '',
+				'before' => '<li>'
+			);
+		?>
+		<ul class="breadcrumbs">
+			<?php woocommerce_breadcrumb( $args ); ?>
+		</ul>
 		<?php
 			/**
 			 * woocommerce_single_product_summary hook.

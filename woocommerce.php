@@ -16,6 +16,18 @@ get_header(); ?>
 		<header>
 			<?php if ( is_archive() ) { ?>
 			<h1 class="entry-title"><?php woocommerce_page_title(); ?></h1>
+			<?php
+				$args = array(
+					'delimiter' => '',
+					'before' => '<li>'
+				);
+			?>
+			<ul class="breadcrumbs">
+				<?php woocommerce_breadcrumb( $args ); ?>
+			</ul>
+			<script>
+			$( document ).ready(function() { $('.page-title').remove(); });
+			</script>
 			<?php } else { ?>
 			<h1 class="entry-title"><?php the_title(); ?></h1>
 			<?php } ?>
