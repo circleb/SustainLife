@@ -10,7 +10,7 @@ function sl_add_more_info_buttons() {
 }
 function sl_more_info_button() {
 	global $product;
-	echo '<a href="' . get_permalink( $product->id ) . '" class="button add_to_cart_button product_type_external">More Details</a>';
+	echo '<a href="' . get_permalink( $product->get_id() ) . '" class="button add_to_cart_button product_type_external">More Details</a>';
 }
 
 add_action( 'woocommerce_after_shop_loop_item', 'sl_remove_product_price', 1 );
