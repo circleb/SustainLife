@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		{{{ data.variation.price_html }}}
 	</div>
 
-	<div class="woocommerce-variation-availability">
+	<div class="woocommerce-variation-availability callout success">
 		{{{ data.variation.availability_html }}}
 	</div>
 </script>

@@ -58,15 +58,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php woocommerce_breadcrumb( $args ); ?>
 		</ul>
 		<div class="reveal" id="atcModal" data-reveal>
+			<h4>Choose Class Date</h4>
 			<div class="class-calendar">
 			<?php
 			$post = get_post();
 			$id =  $post->ID;
 			$product_variations = new WC_Product_Variable( $id );
 			$product_variations = $product_variations->get_available_variations();
+			// echo '<pre>';
+			// var_dump($product_variations);
+			// echo '</pre>';
 
 			foreach ($product_variations as $variation) {
-				$olddate = $variation['attributes']['attribute_class-date'];
+				$olddate = $variation['attributes']['attribute_pa_class-date'];
 				$classdate = strptime($olddate, '%Y-%m-%d');
 				$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
 				?>
@@ -127,13 +131,13 @@ $('.product-addon').each(function() {
   		$(this).addClass(inputclass);
 	}
 });
-$('.price').insertAfter('.breadcrumbs');
+$('p.price').insertAfter('.breadcrumbs');
 $('ul.variations').hide();
 $('.date-icon').click(function() {
 	var currentdate = $(this).data('timestamp');
 	$('.date-icon').removeClass('active');
 	$(this).addClass('active');
-	$( "#class-date" ).val(currentdate).trigger('change');
+	$( "#pa_class-date" ).val(currentdate).trigger('change');
 });
 $(document).ready(function () {
 	$.fn.resizeText = function () {
