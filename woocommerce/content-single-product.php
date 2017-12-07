@@ -57,23 +57,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<ul class="breadcrumbs">
 			<?php woocommerce_breadcrumb( $args ); ?>
 		</ul>
-		<?php
-			/**
-			 * woocommerce_single_product_summary hook.
-			 *
-			 * @hooked woocommerce_template_single_title - 5
-			 * @hooked woocommerce_template_single_rating - 10
-			 * @hooked woocommerce_template_single_price - 10
-			 * @hooked woocommerce_template_single_excerpt - 20
-			 * @hooked woocommerce_template_single_add_to_cart - 30
-			 * @hooked woocommerce_template_single_meta - 40
-			 * @hooked woocommerce_template_single_sharing - 50
-			 * @hooked WC_Structured_Data::generate_product_data() - 60
-			 */
-			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-			do_action( 'woocommerce_single_product_summary' );
-		?>
+		<div class="reveal" id="atcModal" data-reveal>
+			<div class="class-calendar">
+			<?php
+			$post = get_post();
+			$id =  $post->ID;
+			$product_variations = new WC_Product_Variable( $id );
+			$product_variations = $product_variations->get_available_variations();
+
+			foreach ($product_variations as $variation) {
+				$olddate = $variation['attributes']['attribute_class-date'];
+				$classdate = strptime($olddate, '%Y-%m-%d');
+				$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
+				?>
+					<div class="class-calendar-block">
+						<time class="date-icon" data-timestamp="<?php echo $olddate; ?>">
+						  <strong class="month"><?php echo date('M',$timestamp); ?></strong>
+						  <span class="day"><?php echo date('d',$timestamp); ?></span>
+						  <span class="year"><?php echo date('Y',$timestamp); ?></span>
+						</time>
+					</div>
+			<?php } ?>
+			</div>
+		  <?php
+		  	/**
+			* woocommerce_single_product_summary hook.
+	  		*
+	  		* @hooked woocommerce_template_single_title - 5
+	  		* @hooked woocommerce_template_single_rating - 10
+	  		* @hooked woocommerce_template_single_price - 10
+	  		* @hooked woocommerce_template_single_excerpt - 20
+	  		* @hooked woocommerce_template_single_add_to_cart - 30
+	  		* @hooked woocommerce_template_single_meta - 40
+	  		* @hooked woocommerce_template_single_sharing - 50
+	  		* @hooked WC_Structured_Data::generate_product_data() - 60
+	  		*/
+	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+	  		do_action( 'woocommerce_single_product_summary' );
+
+			?>
+		  <button class="close-button" data-close aria-label="Close modal" type="button">
+		    <span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<p><button class="button primary" data-open="atcModal">Register Now</button></p>
 
 	</div><!-- .summary -->
 
@@ -98,6 +126,14 @@ $('.product-addon').each(function() {
   	if (input[0]) {
   		$(this).addClass(inputclass);
 	}
+});
+$('.price').insertAfter('.breadcrumbs');
+$('ul.variations').hide();
+$('.date-icon').click(function() {
+	var currentdate = $(this).data('timestamp');
+	$('.date-icon').removeClass('active');
+	$(this).addClass('active');
+	$( "#class-date" ).val(currentdate).trigger('change');
 });
 $(document).ready(function () {
 	$.fn.resizeText = function () {

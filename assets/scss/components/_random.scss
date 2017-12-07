@@ -39,3 +39,45 @@
 .teacher-archive-thumb {
     margin-right: 1.5rem;
 }
+.class-calendar {
+    @include flex-grid-row;
+    .class-calendar-block {
+        @include flex-grid-column();
+    }
+}
+time.date-icon {
+	display: block;
+	width: 80px;
+	margin: 30px auto;
+	background: $white;
+	text-align: center;
+	font-family: 'Helvetica', sans-serif;
+	position: relative;
+    box-shadow: 0 0 3px $black-alpha;
+    cursor: pointer;
+
+    &.active {
+        box-shadow: 0 0 15px $black-alpha;
+    }
+    .month {
+    	background: $green;
+    	display: block;
+    	padding: 3px 0;
+    	color: #fff;
+    	font-size: 12px;
+    	font-weight: bold;
+    }
+    .day {
+    	display: block;
+    	margin: 0;
+    	padding: 0;
+    	font-size: 48px;
+    	position: relative;
+    }
+    .year {
+    	display: block;
+    	margin: 0;
+    	font-size: 12px;
+    	position: relative;
+    }
+}
