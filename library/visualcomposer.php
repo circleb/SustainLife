@@ -23,8 +23,6 @@ function sl_catslider_handler( $atts, $content = null ) {
     $pct = 1;
     $categories = get_categories(array('taxonomy' => 'product_cat', 'parent' => $category));
     $catinfo = get_term( $category );
-    // $catlink = get_term_link( $category );
-    // $catlink = 'test';
 
     $html = '<h2 class="product-category-slider-title"><a href="' . get_term_link( $catinfo->slug, 'product_cat' ) . '">' . $catinfo->name . '</a></h2>';
     $html .= '<div class="product-category-slider orbit" data-orbit>
