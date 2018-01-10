@@ -76,9 +76,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				?>
 					<div class="class-calendar-block">
 						<time class="date-icon" data-timestamp="<?php echo $olddate; ?>">
-						  <strong class="month"><?php echo date('M',$timestamp); ?></strong>
+						  <strong class="month"><?php echo date('l',$timestamp); ?></strong>
 						  <span class="day"><?php echo date('d',$timestamp); ?></span>
-						  <span class="year"><?php echo date('Y',$timestamp); ?></span>
+						  <span class="year"><?php echo date('M Y',$timestamp); ?></span>
 						</time>
 					</div>
 			<?php } ?>

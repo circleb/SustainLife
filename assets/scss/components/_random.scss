@@ -72,12 +72,15 @@ time.date-icon {
     	margin: 0;
     	padding: 0;
     	font-size: 48px;
+        line-height: 1.2;
     	position: relative;
     }
     .year {
     	display: block;
     	margin: 0;
     	font-size: 12px;
+        padding-bottom: 0.5rem;
+        line-height: 1;
     	position: relative;
     }
 }
@@ -85,8 +88,8 @@ time.date-icon {
     div.product {
         div.images{
             .flex-control-thumbs {
-                background: $black;
                 li {
+                    background: $black;
                     img {
                         opacity: .8;
                     }
