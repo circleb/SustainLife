@@ -81,3 +81,17 @@ time.date-icon {
     	position: relative;
     }
 }
+.woocommerce {
+    div.product {
+        div.images{
+            .flex-control-thumbs {
+                background: $black;
+                li {
+                    img {
+                        opacity: .8;
+                    }
+                }
+            }
+        }
+    }
+}
