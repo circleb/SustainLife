@@ -1,6 +1,7 @@
 .main-wrap {
   @include grid-row();
   margin-top: -3rem;
+  position: relative;
 
   @include breakpoint(medium) {
     margin-top: -5rem;
@@ -73,7 +74,12 @@
         color: $white;
     }
 }
+.teacher-masonry-container {
+    clear: both;
+    .teacher-entry {
 
+    }
+}
 .sidebar {
   // default 2 column
   @include grid-column(12);

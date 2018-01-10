@@ -19,22 +19,41 @@ get_header(); ?>
 
 <header class="featured-hero hero-no-image" role="banner"></header>
 
-<div class="main-wrap sidebar-left" role="main">
+<div class="main-wrap full-width" role="main">
 	<article class="main-content">
 		<header class="kitchen-sink-header">
 			<h1 class="entry-title">Our Teachers</h1>
+			<div class="small button-group taxonomy-filter">
+				<a class="hollow button">All</a>
+				<?php
+					$args = array (
+					    'taxonomy' => 'subject', //your custom post type
+					    'orderby' => 'name',
+					    'order' => 'ASC'
+					);
+					$taxonomies = get_categories( $args );
+					foreach ($taxonomies as $taxonomy) {
+					    echo '<a class="hollow button">' . $taxonomy->name . '</a>';
+					    $post_by_cat = get_posts(array('video_category' => $taxonomy->term_id));
+					}
+				?>
+			</div>
 		</header>
 	<?php if ( have_posts() ) : ?>
+		<div class="row teacher-masonry-container small-up-1 medium-up-2 align-center">
 
-		<?php /* Start the Loop */ ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', 'teacher' ); ?>
-		<?php endwhile; ?>
+			<?php /* Start the Loop */ ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+				<div class="column">
+					<?php get_template_part( 'template-parts/content', 'teacher' ); ?>
+				</div>
+			<?php endwhile; ?>
 
-		<?php else : ?>
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
+			<?php else : ?>
+				<?php get_template_part( 'template-parts/content', 'none' ); ?>
 
-		<?php endif; // End have_posts() check. ?>
+			<?php endif; // End have_posts() check. ?>
+		</div>
 
 		<?php /* Display navigation to next/previous pages when applicable */ ?>
 		<?php
@@ -49,8 +68,27 @@ get_header(); ?>
 		<?php endif; ?>
 
 	</article>
-	<?php get_sidebar(); ?>
 
 </div>
+
+<script>
+$(window).load(function(){
+	var $grid = $('.teacher-masonry-container').masonry({
+		itemSelector: '.column',
+		columnWidth: '.column',
+		percentPosition: true
+	});
+	$('.column').each(function( index ) {
+	  	var taxonomy = $( this ).find('.label').text();
+		$(this).addClass(taxonomy.toLowerCase().replace(/\s/g,'') + ' all');
+	});
+	$('.taxonomy-filter .button').on('click', function() {
+		var taxonomy = $(this).text().toLowerCase().replace(/\s/g,'');
+	  	$('.column').hide();
+		$('.column.'+taxonomy).show();
+		$grid.masonry();
+	});
+});
+</script>
 
 <?php get_footer();
