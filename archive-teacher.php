@@ -21,7 +21,7 @@ get_header(); ?>
 
 <div class="main-wrap full-width" role="main">
 	<article class="main-content">
-		<header class="kitchen-sink-header">
+		<header>
 			<h1 class="entry-title">Our Teachers</h1>
 			<div class="small button-group taxonomy-filter">
 				<a class="hollow button">All</a>

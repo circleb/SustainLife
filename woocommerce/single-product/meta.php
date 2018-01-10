@@ -22,8 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 ?>
-<br class="clearfix">
-<div class="product_meta callout small">
+<div class="product_meta callout small hide">
 
 	<?php do_action( 'woocommerce_product_meta_start' ); ?>
 

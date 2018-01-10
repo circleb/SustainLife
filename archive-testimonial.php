@@ -21,7 +21,7 @@ get_header(); ?>
 
 <div class="main-wrap sidebar-left" role="main">
 	<article class="main-content">
-		<header class="kitchen-sink-header">
+		<header>
 			<h1 class="entry-title">Testimonials</h1>
 		</header>
 	<?php if ( have_posts() ) : ?>

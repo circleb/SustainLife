@@ -19,7 +19,7 @@ get_header(); ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>
 <div class="main-wrap full-width" role="main">
-	<article class="main-content">
+	<article>
 		<header>
 			<h1 class="entry-title">Video Courses</h1>
 			<div class="small button-group taxonomy-filter">
