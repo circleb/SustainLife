@@ -48,7 +48,7 @@ get_header(); ?>
 		  $archive_query = new WP_Query( $archive_args );
 		?>
 		<?php if ( $archive_query->have_posts() ) : ?>
-			<div class="row video-masonry-container small-up-2 medium-up-3 align-center">
+			<div class="row video-masonry-container small-up-2 medium-up-4 align-center">
 
 				<?php /* Start the Loop */ ?>
 				<?php while ( $archive_query->have_posts() ) : $archive_query->the_post(); // run the custom loop ?>
