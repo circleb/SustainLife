@@ -18,7 +18,7 @@
 get_header(); ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>
-<div class="main-wrap sidebar-left" role="main">
+<div class="main-wrap full-width" role="main">
 	<article class="main-content">
 		<header>
 			<h1 class="entry-title">Video Courses</h1>
@@ -70,7 +70,6 @@ get_header(); ?>
 		  	</button>
 		</div>
 	</article>
-	<?php get_sidebar(); ?>
 
 </div>
 

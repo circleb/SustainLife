@@ -39,11 +39,20 @@ get_header(); ?>
 				?>
 			</div>
 		</header>
-	<?php if ( have_posts() ) : ?>
+		<?php
+		  $archive_args = array(
+			  'orderby' => 'name',
+			  'order' => 'ASC',
+			  'post_type' => 'teacher',
+			  'posts_per_page'=> -1
+		  );
+		  $archive_query = new WP_Query( $archive_args );
+		?>
+		<?php if ( $archive_query->have_posts() ) : ?>
 		<div class="row teacher-masonry-container small-up-1 medium-up-2 align-center">
 
 			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); ?>
+			<?php while ( $archive_query->have_posts() ) : $archive_query->the_post(); // run the custom loop ?>
 				<div class="column">
 					<?php get_template_part( 'template-parts/content', 'teacher' ); ?>
 				</div>
@@ -54,18 +63,6 @@ get_header(); ?>
 
 			<?php endif; // End have_posts() check. ?>
 		</div>
-
-		<?php /* Display navigation to next/previous pages when applicable */ ?>
-		<?php
-		if ( function_exists( 'foundationpress_pagination' ) ) :
-			foundationpress_pagination();
-		elseif ( is_paged() ) :
-		?>
-			<nav id="post-nav">
-				<div class="post-previous"><?php next_posts_link( __( '&larr; Older posts', 'foundationpress' ) ); ?></div>
-				<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
-			</nav>
-		<?php endif; ?>
 
 	</article>
 

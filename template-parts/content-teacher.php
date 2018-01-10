@@ -10,8 +10,7 @@
 
 ?>
 
-<div id="post-<?php the_ID(); ?>" <?php post_class('blogpost-entry, clearfix'); ?>>
-	<blockquote>
+<div id="post-<?php the_ID(); ?>" <?php post_class('teacher-entry clearfix'); ?>>
 		<img class="img-round float-left teacher-archive-thumb" src="<?php echo the_post_thumbnail_url('thumbnail'); ?>" />
 		<h3><?php the_title(); ?></h3>
 		<?php the_content(); ?>
@@ -21,5 +20,4 @@
 			echo '<span class="label">' . $term->name . '</span>';
 		}
 		?>
-	</blockquote>
 </div>
