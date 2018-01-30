@@ -63,27 +63,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php
 			$post = get_post();
 			$id =  $post->ID;
-			$product_variations = new WC_Product_Variable( $id );
-			$product_variations = $product_variations->get_available_variations();
-			// echo '<pre>';
-			// var_dump($product_variations);
-			// echo '</pre>';
 
-			foreach ($product_variations as $variation) {
-				$olddate = $variation['attributes']['attribute_pa_class-date'];
-				$classdate = strptime($olddate, '%Y-%m-%d');
-				$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-				?>
-					<div class="class-calendar-block">
-						<time class="date-icon" data-timestamp="<?php echo $olddate; ?>">
-						  <strong class="month"><?php echo date('l',$timestamp); ?></strong>
-						  <span class="day"><?php echo date('d',$timestamp); ?></span>
-						  <span class="year"><?php echo date('M Y',$timestamp); ?></span>
-						</time>
-					</div>
-			<?php } ?>
+			/* Returns array of dates in yyyy-mm-dd format */
+			$dates = slfe_fetch_available_class_dates($id);
+
+			if (count($dates)) {
+				foreach ($dates as $d) {
+					$classdate = strptime($d, '%Y-%m-%d');
+					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
+					?>
+						<div class="class-calendar-block">
+							<time class="date-icon" data-timestamp="<?php echo $d; ?>">
+							  <strong class="month"><?php echo date('l',$timestamp); ?></strong>
+							  <span class="day"><?php echo date('d',$timestamp); ?></span>
+							  <span class="year"><?php echo date('M Y',$timestamp); ?></span>
+							</time>
+						</div>
+				<?php 
+				} 
+			} else {
+				echo "This class is not currently available.";
+			}
+
+			?>
 			</div>
 		  <?php
+
+
 		  	/**
 			* woocommerce_single_product_summary hook.
 	  		*
