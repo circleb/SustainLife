@@ -1,80 +1,103 @@
-.product-category-slider-title {
-    font-weight: lighter;
-    padding-top: 2rem;
+.product-category-block-catlist {
+    padding: 0rem 1.5rem 0.5rem;
+    margin-bottom: .5rem;
 }
-.product-category-slider.orbit {
-    .orbit-container {
-        outline: none;
-        min-height: 284px;
-        overflow: visible;
+.product-category-block-title {
+    font-weight: bolder;
+    padding: 0.5rem 1.5rem 0;
+    margin-bottom: 0;
 
-        .orbit-controls {
-            button {
-                background: $yellow;
-                padding: 1rem 0.5rem;
-                &:hover {
-                    color: $black;
-                }
-            }
-            .orbit-previous {
-                @include breakpoint(medium) {
-                    left: 0;
-                }
-            }
-            .orbit-next {
-                @include breakpoint(medium) {
-                    right: 0;
-                }
-            }
+    @include breakpoint(medium) {
+        font-weight: normal;
+    }
+}
+.product-category-block-description {
+    font-size: 1rem;
+    padding: 0 1.5rem;
+}
+.product-category-block {
+    background: $white;
+    overflow: hidden;
+    position: relative;
+
+    .column {
+        padding-left: 0;
+        padding-right: 0;
+        @include breakpoint(small down) {
+            position: relative;
         }
-        .column {
-            padding-left: 0.2rem;
-            padding-right: 0.2rem;
-        }
-        .orbit-slide {
-            background: transparent;
-            .category-card {
+        .category-card-thumbnail {
+            position: absolute;
+            left: 60%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+
+            @include breakpoint(medium) {
                 position: relative;
-                text-align: center;
+                height: 10rem;
+                overflow: hidden;
+                z-index: 11;
+                left: auto;
+                top: auto;
+                right: auto;
+                bottom: auto;
+            }
+            img {
+                min-height: 100%;
+            }
+        }
+        .category-card-info {
+            background: $green;
+            padding: 0.5rem 1rem;
+            width: 60%;
+            border-top: 1px $white solid;
+
+            @include breakpoint(medium) {
+                transition: all 500ms, max-height 2s;
+                border-top: none;
+                position: absolute;
+                padding: 1rem 1.5rem;
+                width: auto;
+                top: 100%;
+                left: 0;
+                opacity: 0;
+                z-index: 10;
+                bottom: 0;
+                right: 0;
+            }
+            a {
                 color: $white;
+            }
+            p {
+                display: inline-block;
+                padding: 0.05rem 0.8rem 0 0;
+                margin-bottom: 0;
 
-                .category-card-thumbnail {
-
+                @include breakpoint(medium) {
+                    padding: 0.2rem 0.8rem 0 0;
+                    line-height: 1;
+                    margin-bottom: 0.75rem;
                 }
+            }
+            h3 {
+                font-size: 1.2rem;
+                font-weight: bolder;
+                a {
+                    color: $yellow;
+                }
+                @include breakpoint(medium) {
+                    font-size: 2rem;
+                    font-weight: normal;
+                }
+            }
+        }
+        @include breakpoint(medium) {
+            &:hover {
                 .category-card-info {
-                    transition: opacity 500ms, max-height 2s;
-                    background: $black;
-                    position: absolute;
                     top: 0;
-                    right: 0;
-                    left: 0;
-                    min-height: 100%;
-                    max-height: 100%;
-                    padding: 2rem 2.5rem;
-                    opacity: 0;
-                    z-index: 10;
-
-                    a {
-                        color: $white;
-                    }
-                    p {
-                        margin-bottom: 1rem;
-                        margin-top: 0.2rem;
-                        padding: 0.3rem 0.6rem;
-                        line-height: 1.4;
-                        border: 1px solid #ffffff;
-                        display: inline-block;
-                    }
-                    h3 {
-                        font-size: 1.75rem;
-                        font-weight: bolder;
-                    }
-                }
-                &:hover {
-                    .category-card-info {
-                        opacity: 1;
-                        max-height: 100rem;
-                    }
+                    opacity: 1;
+                    bottom: 10rem;
                 }
             }
         }
