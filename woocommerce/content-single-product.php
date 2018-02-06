@@ -82,7 +82,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<?php 
 				} 
 			} else {
-				echo "This class is not currently available.";
+				echo "This class is not currently scheduled.";
 			}
 
 			?>
