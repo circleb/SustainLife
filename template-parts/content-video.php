@@ -48,7 +48,7 @@
 		<span class="excerpt"><?php the_excerpt(); ?></span>
 		<?php
 		foreach ( $terms as $term ) {
-			echo '<span class="label">' . $term->name . '</span>';
+			echo '<span class="label" data-slug=" ' . $term->slug . '">' . $term->name . '</span>';
 		}
 		$tag = get_the_tags(); if ( $tag ) { ?><p><?php the_tags(); ?></p><?php } ?>
 	</footer>

@@ -24,7 +24,7 @@ get_header(); ?>
 		<header>
 			<h1 class="entry-title">Our Teachers</h1>
 			<div class="small button-group taxonomy-filter">
-				<a class="hollow button">All</a>
+				<a class="hollow button" data-slug="all">All</a>
 				<?php
 					$args = array (
 					    'taxonomy' => 'subject', //your custom post type
@@ -33,8 +33,7 @@ get_header(); ?>
 					);
 					$taxonomies = get_categories( $args );
 					foreach ($taxonomies as $taxonomy) {
-					    echo '<a class="hollow button">' . $taxonomy->name . '</a>';
-					    $post_by_cat = get_posts(array('video_category' => $taxonomy->term_id));
+					    echo '<a class="hollow button" data-slug="' . $taxonomy->slug . '">' . $taxonomy->name . '</a>';
 					}
 				?>
 			</div>
@@ -63,7 +62,7 @@ get_header(); ?>
 
 			<?php endif; // End have_posts() check. ?>
 		</div>
-
+		<div class="hidden-teachers hide"></div>
 	</article>
 
 </div>
@@ -76,13 +75,13 @@ $(window).load(function(){
 		percentPosition: true
 	});
 	$('.column').each(function( index ) {
-	  	var taxonomy = $( this ).find('.label').text();
-		$(this).addClass(taxonomy.toLowerCase().replace(/\s/g,'') + ' all');
+	  	var taxonomy = $( this ).find('.label').data('slug');
+		$(this).addClass(taxonomy + ' all');
 	});
 	$('.taxonomy-filter .button').on('click', function() {
-		var taxonomy = $(this).text().toLowerCase().replace(/\s/g,'');
-	  	$('.column').hide();
-		$('.column.'+taxonomy).show();
+		var taxonomy = $(this).data('slug');
+		$('.column').not('.'+taxonomy).appendTo('.hidden-teachers');
+		$('.column.'+taxonomy).appendTo('.teacher-masonry-container');
 		$grid.masonry();
 	});
 });

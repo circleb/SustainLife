@@ -32,8 +32,7 @@ get_header(); ?>
 					);
 					$taxonomies = get_categories( $args );
 					foreach ($taxonomies as $taxonomy) {
-					    echo '<a class="hollow button">' . $taxonomy->name . '</a>';
-					    $post_by_cat = get_posts(array('video_category' => $taxonomy->term_id));
+					    echo '<a class="hollow button" data-slug="' . $taxonomy->slug . '">' . $taxonomy->name . '</a>';
 					}
 				?>
 			</div>
@@ -69,6 +68,7 @@ get_header(); ?>
 		    	<span aria-hidden="true">&times;</span>
 		  	</button>
 		</div>
+		<div class="hidden-videos hide"></div>
 	</article>
 
 </div>
@@ -81,18 +81,18 @@ $(window).load(function(){
 		percentPosition: true
 	});
 	$('.column').each(function() {
-	  	var taxonomy = $(this).find('.label').text();
-		$(this).addClass(taxonomy.toLowerCase().replace(/\s/g,'') + ' all');
+	  	var taxonomy = $(this).find('.label').data('slug');
+		$(this).addClass(taxonomy + ' all');
 	});
 	$('.taxonomy-filter .button').on('click', function() {
-		var taxonomy = $(this).text().toLowerCase().replace(/\s/g,'');
-	  	$('.column').hide();
-		$('.column.'+taxonomy).show();
+		var taxonomy = $(this).data('slug');
+		$('.column').not('.'+taxonomy).appendTo('.hidden-videos');
+		$('.column.'+taxonomy).appendTo('.video-masonry-container');
 		$grid.masonry();
 	});
 	$('.video-thumb, .video-play').on('click', function() {
 		var vidID = $(this).data('id');
-		$("#videoModal iframe").attr("src", "https://www.youtube.com/embed/" + vidID );
+		$("#videoModal iframe").attr("src", "https://www.youtube.com/embed/" + vidID + "&rel=0");
 	});
 	$(document).on('closed.zf.reveal', '[data-reveal]', function() {
 		$("#videoModal iframe").attr("src", "" );

@@ -28,7 +28,7 @@ get_header(); ?>
 					$vidurl = get_field('youtube_video_id') . '?autoplay=1';
 				}
 				?>
-				<iframe src="https://www.youtube.com/embed/<?php echo $vidurl; ?>" frameborder="0" allowfullscreen></iframe>
+				<iframe src="https://www.youtube.com/embed/<?php echo $vidurl; ?>&rel=0" frameborder="0" allowfullscreen></iframe>
 			</div>
 			<ul class="tabs" data-tabs id="example-tabs">
 				<li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Description</a></li>
