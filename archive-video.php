@@ -23,7 +23,7 @@ get_header(); ?>
 		<header>
 			<h1 class="entry-title">Video Courses</h1>
 			<div class="small button-group taxonomy-filter">
-				<a class="hollow button">All</a>
+				<a class="hollow button" data-slug="all">All</a>
 				<?php
 					$args = array (
 					    'taxonomy' => 'video_category', //your custom post type
