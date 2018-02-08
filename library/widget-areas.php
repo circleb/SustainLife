@@ -30,4 +30,106 @@ function foundationpress_sidebar_widgets() {
 }
 
 add_action( 'widgets_init', 'foundationpress_sidebar_widgets' );
+
+class MyWidget extends WP_Widget {
+
+    function __construct() {
+        $widget_ops = array( 'description' => __('Use this widget to add one of your custom menu as a link list widget.') );
+        parent::__construct( 'custom_menu_widget-1', __('My name'), $widget_ops );
+    }
+
+    function widget($args, $instance) {
+        // Get menu
+        $nav_menu = ! empty( $instance['nav_menu'] ) ? wp_get_nav_menu_object( $instance['nav_menu'] ) : false;
+
+        if ( !$nav_menu )
+            return;
+
+        $instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+
+
+
+        echo $args['before_widget'];
+
+        if ( !empty($instance['title']) )
+            echo $args['before_title'] . $instance['title'] . $args['after_title'];
+
+        wp_nav_menu( array( 'menu' => $nav_menu, 'menu_class' => 'vertical menu accordion-menu', 'items_wrap' => '<ul id="%1$s" class="%2$s" data-accordion-menu data-submenu-toggle="true">%3$s</ul>') );
+
+		echo '<ul class="vertical menu accordion-menu" data-accordion-menu data-submenu-toggle="true">
+			  <li>
+			    <a href="http://foundation.zurb.com/">Zurb Foundation</a>
+			    <ul class="menu vertical nested">
+			      <li>
+			        <a href="#">Item 1A</a>
+			        <ul class="menu vertical nested">
+			          <li><a href="#">Item 1Ai</a></li>
+			          <li><a href="#">Item 1Aii</a></li>
+			          <li><a href="#">Item 1Aiii</a></li>
+			        </ul>
+			      </li>
+			      <li><a href="#">Item 1B</a></li>
+			      <li><a href="#">Item 1C</a></li>
+			    </ul>
+			  </li>
+			  <li>
+			    <a href="#">Item 2</a>
+			    <ul class="menu vertical nested">
+			      <li><a href="#">Item 2A</a></li>
+			      <li><a href="#">Item 2B</a></li>
+			    </ul>
+			  </li>
+			  <li><a href="#">Item 3</a></li>
+			</ul>';
+
+        echo $args['after_widget'];
+
+    }
+
+    function update( $new_instance, $old_instance ) {
+        $instance['title'] = strip_tags( stripslashes($new_instance['title']) );
+        $instance['nav_menu'] = (int) $new_instance['nav_menu'];
+        return $instance;
+    }
+
+    function form( $instance ) {
+        $title = isset( $instance['title'] ) ? $instance['title'] : '';
+        $nav_menu = isset( $instance['nav_menu'] ) ? $instance['nav_menu'] : '';
+
+        // Get menus
+        $menus = get_terms( 'nav_menu', array( 'hide_empty' => false ) );
+
+        // If no menus exists, direct the user to go and create some.
+        if ( !$menus ) {
+            echo '<p>'. sprintf( __('No menus have been created yet. <a href="%s">Create some</a>.'), admin_url('nav-menus.php') ) .'</p>';
+            return;
+        }
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
+            <input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('nav_menu'); ?>"><?php _e('Select Menu:'); ?></label>
+            <select id="<?php echo $this->get_field_id('nav_menu'); ?>" name="<?php echo $this->get_field_name('nav_menu'); ?>">
+        <?php
+            foreach ( $menus as $menu ) {
+                $selected = $nav_menu == $menu->term_id ? ' selected="selected"' : '';
+                echo '<option'. $selected .' value="'. $menu->term_id .'">'. $menu->name .'</option>';
+            }
+        ?>
+            </select>
+        </p>
+        <?php
+    }
+}
+
+add_action( 'widgets_init', 'myplugin_register_widgets' );
+
+function myplugin_register_widgets() {
+
+      register_widget( 'MyWidget' );
+
+}
+
 endif;

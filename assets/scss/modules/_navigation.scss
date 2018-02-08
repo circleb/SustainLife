@@ -77,7 +77,7 @@
         border-color: transparent;
     }
 }
-.menu {
+.desktop-menu.menu {
     .site-navigation {
       @include breakpoint(small only) {
         padding: 0; // prevents container visibility on small screens
@@ -103,6 +103,25 @@
                 }
             }
         }
+    }
+}
+
+// Vertical Navigation
+.accordion-menu {
+    a {
+        display: block;
+    }
+    .active, .current_page_item {
+        a {
+            color: #1779ba;
+            background: transparent;
+        }
+    }
+    .is-accordion-submenu-parent > a::after {
+        border-color: $primary-color transparent transparent;
+    }
+    .is-accordion-submenu {
+        padding: 0 0 0 1.5rem;
     }
 }
 

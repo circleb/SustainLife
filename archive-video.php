@@ -80,8 +80,8 @@ $(window).load(function(){
 		columnWidth: '.column',
 		percentPosition: true
 	});
-	$('.column').each(function( index ) {
-	  	var taxonomy = $( this ).find('.label').text();
+	$('.column').each(function() {
+	  	var taxonomy = $(this).find('.label').text();
 		$(this).addClass(taxonomy.toLowerCase().replace(/\s/g,'') + ' all');
 	});
 	$('.taxonomy-filter .button').on('click', function() {
