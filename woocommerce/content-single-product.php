@@ -17,29 +17,26 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit;
 }
 
-?>
+/**
+ * Hook Woocommerce_before_single_product.
+ *
+ * @hooked wc_print_notices - 10
+ */
+do_action( 'woocommerce_before_single_product' );
 
-<?php
-	/**
-	 * woocommerce_before_single_product hook.
-	 *
-	 * @hooked wc_print_notices - 10
-	 */
-	 do_action( 'woocommerce_before_single_product' );
-
-	 if ( post_password_required() ) {
-	 	echo get_the_password_form();
-	 	return;
-	 }
+if ( post_password_required() ) {
+	echo get_the_password_form(); // WPCS: XSS ok.
+	return;
+}
 ?>
 <div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php
 		/**
-		 * woocommerce_before_single_product_summary hook.
+		 * Hook: woocommerce_before_single_product_summary.
 		 *
 		 * @hooked woocommerce_show_product_sale_flash - 10
 		 * @hooked woocommerce_show_product_images - 20
@@ -71,18 +68,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 				foreach ($dates as $d) {
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-					?>
-						<div class="class-calendar-block">
-							<time class="date-icon" data-timestamp="<?php echo $d; ?>">
-							  <strong class="month"><?php echo date('l',$timestamp); ?></strong>
-							  <span class="day"><?php echo date('d',$timestamp); ?></span>
-							  <span class="year"><?php echo date('M Y',$timestamp); ?></span>
-							</time>
-						</div>
-				<?php 
-				} 
+					echo '<div class="class-calendar-block">';
+					echo '<time class="date-icon" data-timestamp="' . $d . '">';
+					echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
+					echo '<span class="day">' . date('d',$timestamp) . '</span>';
+					echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
+					echo '</time>';
+					echo '</div>';
+				}
 			} else {
-				echo "This class is not currently scheduled.";
+				echo "This class is not currently available.";
 			}
 
 			?>
