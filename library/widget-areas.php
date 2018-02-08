@@ -31,11 +31,11 @@ function foundationpress_sidebar_widgets() {
 
 add_action( 'widgets_init', 'foundationpress_sidebar_widgets' );
 
-class MyWidget extends WP_Widget {
+class SLvNavWidget extends WP_Widget {
 
     function __construct() {
         $widget_ops = array( 'description' => __('Use this widget to add one of your custom menu as a link list widget.') );
-        parent::__construct( 'custom_menu_widget-1', __('My name'), $widget_ops );
+        parent::__construct( 'custom_menu_widget-1', __('SL Vertical Navigation'), $widget_ops );
     }
 
     function widget($args, $instance) {
@@ -55,32 +55,6 @@ class MyWidget extends WP_Widget {
             echo $args['before_title'] . $instance['title'] . $args['after_title'];
 
         wp_nav_menu( array( 'menu' => $nav_menu, 'menu_class' => 'vertical menu accordion-menu', 'items_wrap' => '<ul id="%1$s" class="%2$s" data-accordion-menu data-submenu-toggle="true">%3$s</ul>') );
-
-		echo '<ul class="vertical menu accordion-menu" data-accordion-menu data-submenu-toggle="true">
-			  <li>
-			    <a href="http://foundation.zurb.com/">Zurb Foundation</a>
-			    <ul class="menu vertical nested">
-			      <li>
-			        <a href="#">Item 1A</a>
-			        <ul class="menu vertical nested">
-			          <li><a href="#">Item 1Ai</a></li>
-			          <li><a href="#">Item 1Aii</a></li>
-			          <li><a href="#">Item 1Aiii</a></li>
-			        </ul>
-			      </li>
-			      <li><a href="#">Item 1B</a></li>
-			      <li><a href="#">Item 1C</a></li>
-			    </ul>
-			  </li>
-			  <li>
-			    <a href="#">Item 2</a>
-			    <ul class="menu vertical nested">
-			      <li><a href="#">Item 2A</a></li>
-			      <li><a href="#">Item 2B</a></li>
-			    </ul>
-			  </li>
-			  <li><a href="#">Item 3</a></li>
-			</ul>';
 
         echo $args['after_widget'];
 
@@ -124,11 +98,11 @@ class MyWidget extends WP_Widget {
     }
 }
 
-add_action( 'widgets_init', 'myplugin_register_widgets' );
+add_action( 'widgets_init', 'SL_register_widgets' );
 
-function myplugin_register_widgets() {
+function SL_register_widgets() {
 
-      register_widget( 'MyWidget' );
+      register_widget( 'SLvNavWidget' );
 
 }
 
