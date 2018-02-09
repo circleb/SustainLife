@@ -27,7 +27,6 @@ get_header(); ?>
 										<a href="<?php the_sub_field('link'); ?>" class="button yellow"><?php the_sub_field('button'); ?></a>
 									<?php endwhile; ?>
 								<?php endif; ?>
-
 							</figcaption>
 						</figure>
 					</li>
