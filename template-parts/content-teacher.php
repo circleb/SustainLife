@@ -17,7 +17,7 @@
 		<?php
 		$terms = get_the_terms( get_the_ID(), 'subject' );
 		foreach ( $terms as $term ) {
-			echo '<span class="label" data-slug=" ' . $term->slug . '">' . $term->name . '</span>';
+			echo '<span class="label" data-slug=" ' . $term->slug . '">' . $term->name . '</span> ';
 		}
 		?>
 </div>

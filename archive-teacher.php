@@ -75,8 +75,17 @@ $(window).load(function(){
 		percentPosition: true
 	});
 	$('.column').each(function( index ) {
-	  	var taxonomy = $( this ).find('.label').data('slug');
-		$(this).addClass(taxonomy + ' all');
+		var column = $(this);
+		$(this).find('.label').each(function() {
+			var taxonomy = $(this).data('slug');
+			column.addClass(taxonomy);
+		});
+		column.addClass('all');
+	});
+	$('.taxonomy-filter .button').each(function() {
+		if ($(this).data('slug') === 'fiber-crafts') {
+			$(this).remove();
+		}
 	});
 	$('.taxonomy-filter .button').on('click', function() {
 		var taxonomy = $(this).data('slug');
