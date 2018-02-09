@@ -21,7 +21,13 @@ get_header(); ?>
 							<figcaption class="orbit-caption">
 								<h3><?php the_sub_field('title'); ?></h3>
 								<?php the_sub_field('description'); ?>
-								<a href="<?php the_sub_field('link'); ?>" class="button yellow"><?php the_sub_field('button'); ?></a>
+
+								<?php if( have_rows('buttons') ): ?>
+									<?php while( have_rows('buttons') ): the_row(); ?>
+										<a href="<?php the_sub_field('link'); ?>" class="button yellow"><?php the_sub_field('button'); ?></a>
+									<?php endwhile; ?>
+								<?php endif; ?>
+
 							</figcaption>
 						</figure>
 					</li>
