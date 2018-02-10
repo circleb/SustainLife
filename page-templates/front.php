@@ -18,6 +18,7 @@ get_header(); ?>
 					<li class="orbit-slide">
 						<figure class="orbit-figure">
 							<img class="orbit-image" src="<?php echo $image; ?>" alt="<?php the_sub_field('title'); ?>">
+							<?php if( get_sub_field('title') ): ?>
 							<figcaption class="orbit-caption">
 								<h3><?php the_sub_field('title'); ?></h3>
 								<?php the_sub_field('description'); ?>
@@ -28,6 +29,7 @@ get_header(); ?>
 									<?php endwhile; ?>
 								<?php endif; ?>
 							</figcaption>
+						<?php endif; ?>
 						</figure>
 					</li>
 				<?php endwhile; ?>
