@@ -54,6 +54,10 @@ if ( post_password_required() ) {
 		<ul class="breadcrumbs">
 			<?php woocommerce_breadcrumb( $args ); ?>
 		</ul>
+		<?php
+		$product_type = get_field('product_type');
+		if($product_type == 'class') { ?>
+
 		<div class="reveal" id="atcModal" data-reveal>
 			<h4>Choose Class Date</h4>
 			<div class="class-calendar">
@@ -107,6 +111,14 @@ if ( post_password_required() ) {
 		  </button>
 		</div>
 		<p><button class="button primary" data-open="atcModal">Register Now</button></p>
+
+		<?php
+		} else {
+			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+	  		do_action( 'woocommerce_single_product_summary' );
+		}
+		?>
 
 	</div><!-- .summary -->
 
