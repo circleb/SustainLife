@@ -84,6 +84,11 @@ time.date-icon {
     	position: relative;
     }
 }
+.entry-content .search-featured-image {
+    @include thumbnail;
+    float: left;
+    margin-right: 2rem;
+}
 .woocommerce {
     div.product {
         div.images{

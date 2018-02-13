@@ -10,7 +10,7 @@ get_header(); ?>
 
 <?php get_template_part( 'template-parts/featured-image' ); ?>
 
-<div class="main-wrap sidebar-left" role="main">
+<div class="main-wrap full-width" role="main">
 
 <?php do_action( 'foundationpress_before_content' ); ?>
 
@@ -22,7 +22,11 @@ get_header(); ?>
 	<?php if ( have_posts() ) : ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+			<?php if (get_post_type( $post ) == 'product') : ?>
+				<?php get_template_part( 'template-parts/content', 'product' ); ?>
+			<?php else : ?>
+				<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+			<?php endif; ?>
 		<?php endwhile; ?>
 
 		<?php else : ?>
@@ -47,7 +51,6 @@ get_header(); ?>
 </article>
 
 <?php do_action( 'foundationpress_after_content' ); ?>
-<?php get_sidebar(); ?>
 
 </div>
 
