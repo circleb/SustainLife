@@ -7,7 +7,7 @@
  * @package FoundationPress
  * @since FoundationPress 1.0.0
  */
-
+ header('Access-Control-Allow-Origin: http://slstage1.wpengine.com', false);
 ?>
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?> >
