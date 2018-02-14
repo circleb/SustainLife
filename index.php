@@ -13,7 +13,7 @@ get_header(); ?>
 <div class="main-wrap sidebar-left" role="main">
 	<article class="main-content">
 	<header>
-		<h1 class="entry-title"><?php the_title(); ?></h1>
+		<h1 class="entry-title">SustainLife Blog</h1>
 	</header>
 	<?php if ( have_posts() ) : ?>
 
