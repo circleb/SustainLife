@@ -35,8 +35,61 @@
       padding: 3rem 2.5rem;
   }
 }
-.teacher-masonry-container {
-    clear: both;
+.reveal.video-modal {
+    padding: 0;
+    overflow: visible;
+    .close-button {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+    }
+}
+.related-posts-row {
+    @include clearfix;
+    .related-posts-card {
+        width: 48%;
+        float: left;
+        padding: 1rem;
+        margin: 0 3.8% 2.992em 0;
+        background: $white-alpha;
+        &:nth-child(even) {
+            margin-right: 0;
+        }
+        @include breakpoint(medium) {
+            width: 16.66667%;
+            &:nth-child(5) {
+                margin-right: 0;
+            }
+            &:nth-child(even) {
+                margin-right: 3.8%;
+            }
+        }
+        img {
+            margin-bottom: 1rem;
+        }
+        .related-posts-card-title {
+            font-size: 120%;
+            font-weight: bold;
+        }
+    }
+    .related-posts-row .related-posts-card:last-child:not(:first-child) {
+        float: left;
+    }
+}
+.video-details-container {
+    background: $black;
+    padding: 3rem 4rem;
+
+    h3 {
+        padding-top: 1rem;
+    }
+    * {
+        color: $white;
+    }
+    .tabs, .tabs-content {
+        background: none;
+        border: 0;
+    }
 }
 .video-entry {
     background: $white;

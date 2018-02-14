@@ -60,9 +60,12 @@ get_header(); ?>
 		<?php else : ?>
 			<?php get_template_part( 'template-parts/content', 'none' ); ?>
 		<?php endif; // End have_posts() check. ?>
-		<div class="large reveal" id="videoModal" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-up">
+		<div class="large reveal video-modal" id="videoModal" data-close-on-click="true" data-reveal data-animation-in="slide-in-down" data-animation-out="slide-out-up">
 			<div class="embed-container">
 				<iframe src="" frameborder="0" allowfullscreen></iframe>
+			</div>
+			<div class="video-details-container">
+				<div id="video-details"></div>
 			</div>
 		  	<button class="close-button" data-close aria-label="Close modal" type="button">
 		    	<span aria-hidden="true">&times;</span>
@@ -90,12 +93,26 @@ $(window).load(function(){
 		$('.column.'+taxonomy).appendTo('.video-masonry-container');
 		$grid.masonry();
 	});
-	$('.video-thumb, .video-play').on('click', function() {
-		var vidID = $(this).data('id');
+	$('.video-thumb, .video-play, .video-thumb-title').on('click', function() {
+		var vidID = $(this).data('id'),
+			id = $(this).data('postid');
 		$("#videoModal iframe").attr("src", "https://www.youtube.com/embed/" + vidID + "&rel=0");
+
+	    $.ajax({
+	      	url: ajaxurl,
+	      	data: {
+	        	'action' : 'fetch_modal_content',
+	        	'id' : id
+	        	},
+	      	success:function(data) {
+				$("#video-details").html(data);
+				new Foundation.Tabs($('.tabs'));
+	      	}
+	    });
 	});
 	$(document).on('closed.zf.reveal', '[data-reveal]', function() {
 		$("#videoModal iframe").attr("src", "" );
+		$("#video-details").html('');
 	});
 });
 </script>

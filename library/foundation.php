@@ -182,3 +182,72 @@ function foundationpress_title_bar_responsive_toggle() {
 }
 endif;
 
+/**
+ * Get Content for Video mb_encoding_aliases
+ */
+
+function fetch_modal_content() {
+  	if ( isset($_REQUEST) ) {
+    	$post_id = $_REQUEST['id'];
+
+		echo get_post_field('post_content', $post_id);
+		echo '<br/>';
+		echo '<br/>';
+
+		if ( get_field('is_multiple_video_course', $post_id) ) {
+			echo '<h3>Transcripts</h3>';
+			echo '<ul class="tabs" data-tabs id="transcript-tabs">';
+			if ( have_rows('subvideo_details', $post_id) ) {
+				$tabi = 1;
+				while ( have_rows('subvideo_details', $post_id) ) : the_row();
+					echo '<li class="tabs-title' . ($tabi == 1 ? ' is-active' : '') . '"><a href="#panel' . $tabi . '">' . get_sub_field('video_title') . '</a></li>';
+					$tabi++;
+				endwhile;
+			}
+			echo '</ul>';
+		}
+
+		if ( get_field('is_multiple_video_course', $post_id) ) {
+			echo '<div class="tabs-content" data-tabs-content="transcript-tabs">';
+			if ( have_rows('subvideo_details', $post_id) ) {
+				$tsi = 1;
+				while ( have_rows('subvideo_details', $post_id) ) : the_row();
+					echo '<div class="tabs-panel' . ($tsi == 1 ? ' is-active' : '') . '" id="panel' . $tsi . '">';
+					the_sub_field('transcript');
+					echo '</div>';
+					$tsi++;
+				endwhile;
+			}
+			echo '</div>';
+		} else {
+			echo '<h3>Transcript</h3>';
+			echo get_field('video_transcript', $post_id);
+		}
+
+		if ( have_rows('related_products_repeater', $post_id) ) {
+			while ( have_rows('related_products_repeater', $post_id) ) : the_row();
+				$posts = get_sub_field('related_products');
+				if( $posts ):
+					echo '<h3>Related ' . get_sub_field('related_product_type') . '</h3>'; ?>
+					<div class="related-posts-row">
+						<?php foreach( $posts as $p ): ?>
+							<div class="related-posts-card">
+								<a href="<?php echo get_permalink( $p->ID ); ?>">
+									<?php echo get_the_post_thumbnail( $p->ID, 'thumbnail' ); ?>
+								</a>
+							  <div class="related-posts-card-details">
+							    <p class="related-posts-card-title"><a href="<?php echo get_permalink( $p->ID ); ?>"><?php echo get_the_title( $p->ID ); ?></a></p>
+							    <p>It has an easy to override visual style, and is appropriately subdued.</p>
+							  </div>
+							</div>
+						<?php endforeach; ?>
+					</div>
+				<?php
+				endif;
+			endwhile;
+		}
+  	}
+  	die();
+}
+add_action( 'wp_ajax_fetch_modal_content', 'fetch_modal_content' );
+add_action( 'wp_ajax_nopriv_fetch_modal_content', 'fetch_modal_content' );

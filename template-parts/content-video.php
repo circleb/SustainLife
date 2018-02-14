@@ -23,7 +23,9 @@
 			$vidurl = 'videoseries?list=' . $vidkey;
 			$VidDuration =  count( get_field('subvideo_details') ) . ' videos';
 
-		    the_post_thumbnail();
+			echo '<img class="video-thumb" data-postid="' . get_the_ID() . '" data-open="videoModal" data-id="' . $vidurl . '" src="';
+			the_post_thumbnail_url();
+			echo '"/>';
 		} else {
 			$vidkey = get_field('youtube_video_id');
 			$vidurl = $vidkey . '?autoplay=1';
@@ -37,13 +39,13 @@
 				$VidDuration = $start->format('i:s');
 			}
 
-			echo '<img class="video-thumb" data-open="videoModal" data-id="' . $vidurl . '" src="http://i3.ytimg.com/vi/' . $vidkey . '/maxresdefault.jpg"/>';
+			echo '<img class="video-thumb" data-postid="' . get_the_ID() . '" data-open="videoModal" data-id="' . $vidurl . '" src="http://i3.ytimg.com/vi/' . $vidkey . '/maxresdefault.jpg"/>';
 		}
 		?>
-		<i class="fa fa-play-circle-o fa-4x video-play" data-open="videoModal" data-id="<?php echo $vidurl; ?>"></i>
+		<i class="fa fa-play-circle-o fa-4x video-play" data-postid="<?php echo get_the_ID(); ?>" data-open="videoModal" data-id="<?php echo $vidurl; ?>"></i>
 	</div>
 	<footer>
-		<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+		<a data-open="videoModal" data-id="<?php echo $vidurl; ?>" data-postid="<?php echo get_the_ID(); ?>" class="video-thumb-title"><h4><?php the_title(); ?></h4></a>
 		<span class="video-time"><?php echo $VidDuration; ?></span>
 		<span class="excerpt"><?php the_excerpt(); ?></span>
 		<?php
