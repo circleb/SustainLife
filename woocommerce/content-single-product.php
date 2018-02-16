@@ -59,8 +59,6 @@ if ( post_password_required() ) {
 		if($product_type == 'class') { ?>
 
 		<div class="reveal" id="atcModal" data-reveal>
-			<h4>Choose Class Date</h4>
-			<div class="class-calendar">
 			<?php
 			$post = get_post();
 			$id =  $post->ID;
@@ -68,7 +66,10 @@ if ( post_password_required() ) {
 			/* Returns array of dates in yyyy-mm-dd format */
 			$dates = slfe_fetch_available_class_dates($id);
 
-			if (count($dates)) {
+			if (count($dates)) { ?>
+				<h4>Choose Class Date</h4>
+				<div class="class-calendar">
+				<?php
 				foreach ($dates as $d) {
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
@@ -79,33 +80,33 @@ if ( post_password_required() ) {
 					echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
 					echo '</time>';
 					echo '</div>';
-				}
-			} else {
-				echo "This class is not currently available.";
-			}
+				} ?>
+				<button class="button primary expanded" data-open="sbModal">Request a Different Date</button>
+				<p>&nbsp;</p>
+				</div>
+				<?php
 
-			?>
-			</div>
-		  <?php
+	  		  	/**
+	  			* woocommerce_single_product_summary hook.
+	  	  		*
+	  	  		* @hooked woocommerce_template_single_title - 5
+	  	  		* @hooked woocommerce_template_single_rating - 10
+	  	  		* @hooked woocommerce_template_single_price - 10
+	  	  		* @hooked woocommerce_template_single_excerpt - 20
+	  	  		* @hooked woocommerce_template_single_add_to_cart - 30
+	  	  		* @hooked woocommerce_template_single_meta - 40
+	  	  		* @hooked woocommerce_template_single_sharing - 50
+	  	  		* @hooked WC_Structured_Data::generate_product_data() - 60
+	  	  		*/
+	  	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+	  	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+	  	  		do_action( 'woocommerce_single_product_summary' );
 
-
-		  	/**
-			* woocommerce_single_product_summary hook.
-	  		*
-	  		* @hooked woocommerce_template_single_title - 5
-	  		* @hooked woocommerce_template_single_rating - 10
-	  		* @hooked woocommerce_template_single_price - 10
-	  		* @hooked woocommerce_template_single_excerpt - 20
-	  		* @hooked woocommerce_template_single_add_to_cart - 30
-	  		* @hooked woocommerce_template_single_meta - 40
-	  		* @hooked woocommerce_template_single_sharing - 50
-	  		* @hooked WC_Structured_Data::generate_product_data() - 60
-	  		*/
-	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-	  		do_action( 'woocommerce_single_product_summary' );
-
-			?>
+	  			?>
+			<?php } else { ?>
+				<div class="callout alert">This class is not currently available.</div>
+				<button class="button primary expanded" data-open="sbModal">Add me to the Standby List</button>
+			<?php } ?>
 		  <button class="close-button" data-close aria-label="Close modal" type="button">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
@@ -120,6 +121,12 @@ if ( post_password_required() ) {
 		}
 		?>
 
+		<div class="reveal" id="sbModal" data-reveal>
+			<?php echo do_shortcode("[ninja_form id=2]"); ?>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 	</div><!-- .summary -->
 
 	<?php
