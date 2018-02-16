@@ -1,7 +1,6 @@
 /* Sticky Footer */
 
 (function($) {
-
   var $footer = $('[data-sticky-footer]'); // only search once
 
   $(window).bind('load resize orientationChange', function () {

@@ -112,7 +112,6 @@ if ( post_password_required() ) {
 		  </button>
 		</div>
 		<p><button class="button primary" data-open="atcModal">Register Now</button></p>
-
 		<?php
 		} else {
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
@@ -151,7 +150,6 @@ $('.product-addon').each(function() {
   		$(this).addClass(inputclass);
 	}
 });
-$('p.price').insertAfter('.breadcrumbs');
 $('ul.variations').hide();
 $('.date-icon').click(function() {
 	var currentdate = $(this).data('timestamp');
@@ -160,6 +158,13 @@ $('.date-icon').click(function() {
 	$( "#pa_class-date" ).val(currentdate).trigger('change');
 });
 $(document).ready(function () {
+	$('p.price').each(function() {
+		if ($(this).text().indexOf('–') > -1) {
+			var highPrice = $(this).find(">:last-child").remove();
+			$(this).html(highPrice);
+		}
+		$(this).insertAfter('.breadcrumbs');
+	});
 	$.fn.resizeText = function () {
 	    var width = $(this).innerWidth();
 	    var height = $(this).innerHeight();
