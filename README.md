@@ -1,6 +1,6 @@
 # SustainLife.org WP Theme
 
-This is a theme for WordPress based on Foundation 6, the most advanced responsive (mobile-first) framework in the world. And is based on FoundationPress
+This is a theme for WordPress based on Foundation 6, the most advanced responsive (mobile-first) framework in the world. It is based on FoundationPress
 
 ## Notes
 Forked project from circleb to mpressly so I can make edits.
