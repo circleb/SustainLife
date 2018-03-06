@@ -13,9 +13,6 @@
 <div id="post-<?php the_ID(); ?>" <?php post_class('video-entry'); ?>>
 	<div class="entry-content">
 		<?php
-		$iframe = get_field('video_url');
-		preg_match('/src="(.+?)"/', $iframe, $matches);
-		$src = $matches[1];
 		$terms = get_the_terms( get_the_ID(), 'video_category' );
 
 		if ( get_field('is_multiple_video_course') ) {
