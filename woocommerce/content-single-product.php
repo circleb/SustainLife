@@ -70,10 +70,13 @@ if ( post_password_required() ) {
 				<h4>Choose Class Date</h4>
 				<div class="class-calendar">
 				<?php
-				foreach ($dates as $d) {
+				foreach ($dates as $date_info) {
+					$d = $date_info['date'];
+					$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
+
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-					echo '<div class="class-calendar-block">';
+					printf('<div class="class-calendar-block %s">', $status);
 					echo '<time class="date-icon" data-timestamp="' . $d . '">';
 					echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
 					echo '<span class="day">' . date('d',$timestamp) . '</span>';
