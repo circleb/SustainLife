@@ -63,8 +63,10 @@ if ( post_password_required() ) {
 			$post = get_post();
 			$id =  $post->ID;
 
-			/* Returns array of dates in yyyy-mm-dd format */
-			$dates = slfe_fetch_available_class_dates($id);
+			/* Returns array of array( 'date' => '2018-03-05', 'status' => 'avail' (or 'unavail'))
+			** if parm2 = true;
+			**/
+			$dates = slfe_fetch_available_class_dates($id, true);
 
 			if (count($dates)) { ?>
 				<h4>Choose Class Date</h4>
@@ -76,13 +78,15 @@ if ( post_password_required() ) {
 
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-					printf('<div class="class-calendar-block %s">', $status);
-					echo '<time class="date-icon" data-timestamp="' . $d . '">';
-					echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
-					echo '<span class="day">' . date('d',$timestamp) . '</span>';
-					echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
-					echo '</time>';
-					echo '</div>';
+					if ($status == 'avail') { // "If" statement is temporary -- remove when implementing display of avail/unavail classes
+						printf('<div class="class-calendar-block %s">', $status);
+						echo '<time class="date-icon" data-timestamp="' . $d . '">';
+						echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
+						echo '<span class="day">' . date('d',$timestamp) . '</span>';
+						echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
+						echo '</time>';
+						echo '</div>';
+					}
 				} ?>
 				<button class="button primary expanded" data-open="sbModal">Request a Different Date</button>
 				<p>&nbsp;</p>
