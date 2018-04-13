@@ -35,6 +35,37 @@
         margin-top: 2rem;
     }
 }
+.photo-masonry-container {
+    .column {
+        padding-right: 1px;
+        padding-left: 1px;
+    }
+}
+.photo-entry {
+    padding-bottom: 2px;
+    @include breakpoint(medium) {
+    }
+    .entry-content {
+        padding: 0;
+        .label {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.25rem;
+            max-width: 10rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.5;
+        }
+    }
+}
+
+#photoModal {
+    background: transparent;
+    color: $white;
+    border: 0;
+    outline: none;
+    text-align: center;
+    top: 2rem !important;
+}
 
 .teacher-archive-thumb {
     margin-right: 1.5rem;
