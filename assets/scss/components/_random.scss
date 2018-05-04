@@ -85,10 +85,12 @@ time.date-icon {
 	font-family: 'Helvetica', sans-serif;
 	position: relative;
     box-shadow: 0 0 3px $black-alpha;
-    cursor: pointer;
 
     &.active {
         box-shadow: 0 0 15px $black-alpha;
+    }
+    &.unavail {
+        opacity: 0.5;
     }
     .month {
     	background: $green;
@@ -113,6 +115,36 @@ time.date-icon {
         padding-bottom: 0.5rem;
         line-height: 1;
     	position: relative;
+    }
+}
+.ribbon-container {
+    position: relative;
+    overflow: hidden;
+
+    .ribbon {
+        background-color: #a00;
+        overflow: hidden;
+        white-space: nowrap;
+        position: absolute;
+        left: -40px;
+        top: 20px;
+        /* for 45 deg rotation */
+        -webkit-transform: rotate(-45deg);
+           -moz-transform: rotate(-45deg);
+            -ms-transform: rotate(-45deg);
+             -o-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+    }
+    .ribbon span {
+        color: #fff;
+        display: block;
+        font: bold 100% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        margin: 1px 0;
+        padding: 2px 50px;
+        text-align: center;
+        text-decoration: none;
+        /* for creating shadow */
+        text-shadow: 0 0 5px #444;
     }
 }
 .entry-content .search-featured-image {

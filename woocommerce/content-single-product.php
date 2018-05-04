@@ -58,7 +58,6 @@ if ( post_password_required() ) {
 		$product_type = get_field('product_type');
 		if($product_type == 'class') { ?>
 
-		<div class="reveal" id="atcModal" data-reveal>
 			<?php
 			$post = get_post();
 			$id =  $post->ID;
@@ -67,6 +66,7 @@ if ( post_password_required() ) {
 			** if parm2 = true;
 			**/
 			$dates = slfe_fetch_available_class_dates($id, true);
+			// var_dump($dates);
 
 			if (count($dates)) { ?>
 				<h4>Choose Class Date</h4>
@@ -75,50 +75,50 @@ if ( post_password_required() ) {
 				foreach ($dates as $date_info) {
 					$d = $date_info['date'];
 					$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
-
+					// var_dump($date_info);
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-					if ($status == 'avail') { // "If" statement is temporary -- remove when implementing display of avail/unavail classes
-						printf('<div class="class-calendar-block %s">', $status);
-						echo '<time class="date-icon" data-timestamp="' . $d . '">';
+						echo '<div class="class-calendar-block ribbon-container">';
+						echo '<time class="date-icon ' . $status . '" data-timestamp="' . $d . '">';
 						echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
 						echo '<span class="day">' . date('d',$timestamp) . '</span>';
 						echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
 						echo '</time>';
+						if ($status == 'unavail') {
+							echo '<div class="ribbon both_ribbon"><span>Closed</span></div>';
+							echo '<button class="button tiny" data-open="sbModal">Request Standby</button>';
+						} else {
+							echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
+						}
 						echo '</div>';
-					}
 				} ?>
-				<button class="button primary expanded" data-open="sbModal">Request a Different Date</button>
 				<p>&nbsp;</p>
 				</div>
-				<?php
-
-	  		  	/**
-	  			* woocommerce_single_product_summary hook.
-	  	  		*
-	  	  		* @hooked woocommerce_template_single_title - 5
-	  	  		* @hooked woocommerce_template_single_rating - 10
-	  	  		* @hooked woocommerce_template_single_price - 10
-	  	  		* @hooked woocommerce_template_single_excerpt - 20
-	  	  		* @hooked woocommerce_template_single_add_to_cart - 30
-	  	  		* @hooked woocommerce_template_single_meta - 40
-	  	  		* @hooked woocommerce_template_single_sharing - 50
-	  	  		* @hooked WC_Structured_Data::generate_product_data() - 60
-	  	  		*/
-	  	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-	  	  		remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-	  	  		do_action( 'woocommerce_single_product_summary' );
-
-	  			?>
-			<?php } else { ?>
-				<div class="callout alert">This class is not currently available.</div>
-				<button class="button primary expanded" data-open="sbModal">Add me to the Standby List</button>
 			<?php } ?>
+		<div class="reveal" id="atcModal" data-reveal>
+			<?php
+
+			/**
+			* woocommerce_single_product_summary hook.
+			*
+			* @hooked woocommerce_template_single_title - 5
+			* @hooked woocommerce_template_single_rating - 10
+			* @hooked woocommerce_template_single_price - 10
+			* @hooked woocommerce_template_single_excerpt - 20
+			* @hooked woocommerce_template_single_add_to_cart - 30
+			* @hooked woocommerce_template_single_meta - 40
+			* @hooked woocommerce_template_single_sharing - 50
+			* @hooked WC_Structured_Data::generate_product_data() - 60
+			*/
+			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+			do_action( 'woocommerce_single_product_summary' );
+
+			?>
 		  <button class="close-button" data-close aria-label="Close modal" type="button">
 		    <span aria-hidden="true">&times;</span>
 		  </button>
 		</div>
-		<p><button class="button primary" data-open="atcModal">Register Now</button></p>
 		<?php
 		} else {
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
@@ -158,10 +158,10 @@ $('.product-addon').each(function() {
 	}
 });
 $('ul.variations').hide();
-$('.date-icon').click(function() {
+$('.register-button').click(function() {
 	var currentdate = $(this).data('timestamp');
 	$('.date-icon').removeClass('active');
-	$(this).addClass('active');
+	$('.date-icon[data-timestamp='+currentdate+']').addClass('active');
 	$( "#pa_class-date" ).val(currentdate).trigger('change');
 });
 $(document).ready(function () {
