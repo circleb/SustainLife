@@ -78,6 +78,7 @@ if ( post_password_required() ) {
 					// var_dump($date_info);
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
+					$d2 = date('m/d/Y',$timestamp);
 						echo '<div class="class-calendar-block ribbon-container">';
 						echo '<time class="date-icon ' . $status . '" data-timestamp="' . $d . '">';
 						echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
@@ -86,7 +87,7 @@ if ( post_password_required() ) {
 						echo '</time>';
 						if ($status == 'unavail') {
 							echo '<div class="ribbon both_ribbon"><span>Closed</span></div>';
-							echo '<button class="button tiny" data-open="sbModal">Request Standby</button>';
+							echo '<button class="button tiny standby-button" data-open="sbModal" data-timestamp="' . $d2 . '">Request Standby</button>';
 						} else {
 							echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
 						}
@@ -163,6 +164,10 @@ $('.register-button').click(function() {
 	$('.date-icon').removeClass('active');
 	$('.date-icon[data-timestamp='+currentdate+']').addClass('active');
 	$( "#pa_class-date" ).val(currentdate).trigger('change');
+});
+$('.standby-button').click(function() {
+	var currentdate = $(this).data('timestamp');
+	$( ".pikaday__display" ).val(currentdate).trigger('change');
 });
 $(document).ready(function () {
 	$('p.price').each(function() {
