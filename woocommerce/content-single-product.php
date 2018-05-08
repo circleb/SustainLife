@@ -75,7 +75,7 @@ if ( post_password_required() ) {
 				foreach ($dates as $date_info) {
 					$d = $date_info['date'];
 					$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
-<<<<<<< HEAD
+					if ($status != "hidden") { // supresses instances that are marked as hidden (includes overflow classes and mis-configured classes)
 					// var_dump($date_info);
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
@@ -93,26 +93,7 @@ if ( post_password_required() ) {
 							echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
 						}
 						echo '</div>';
-=======
-					if ($status != "hidden") { // supresses instances that are marked as hidden (includes overflow classes and mis-configured classes)
-						// var_dump($date_info);
-						$classdate = strptime($d, '%Y-%m-%d');
-						$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-							echo '<div class="class-calendar-block ribbon-container">';
-							echo '<time class="date-icon ' . $status . '" data-timestamp="' . $d . '">';
-							echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
-							echo '<span class="day">' . date('d',$timestamp) . '</span>';
-							echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
-							echo '</time>';
-							if ($status == 'unavail') {
-								echo '<div class="ribbon both_ribbon"><span>Closed</span></div>';
-								echo '<button class="button tiny" data-open="sbModal">Request Standby</button>';
-							} else {
-								echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
-							}
-							echo '</div>';
 					}
->>>>>>> deab2abb60100ef12156d222b107dbc5a5d832ae
 				} ?>
 				<p>&nbsp;</p>
 				</div>
