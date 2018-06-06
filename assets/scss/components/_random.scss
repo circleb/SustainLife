@@ -70,6 +70,15 @@
 .teacher-archive-thumb {
     margin-right: 1.5rem;
 }
+.woocommerce.single-product {
+    .reveal {
+        padding: 70px;
+
+        input, select, textarea {
+            border: 1px solid #cacaca;
+        }
+    }
+}
 .class-calendar {
     @include flex-grid-row;
     .class-calendar-block {

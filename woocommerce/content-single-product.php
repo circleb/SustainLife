@@ -10,15 +10,18 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see     https://docs.woocommerce.com/document/template-structure/
- * @package WooCommerce/Templates
- * @version 3.4.0
+ * @see 	    https://docs.woocommerce.com/document/template-structure/
+ * @author 		WooThemes
+ * @package 	WooCommerce/Templates
+ * @version     3.0.0
  */
 
-defined( 'ABSPATH' ) || exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
- * Hook: woocommerce_before_single_product.
+ * Hook Woocommerce_before_single_product.
  *
  * @hooked wc_print_notices - 10
  */
@@ -29,7 +32,7 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class(); ?>>
+<div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php
 		/**
@@ -72,7 +75,6 @@ if ( post_password_required() ) {
 				foreach ($dates as $date_info) {
 					$d = $date_info['date'];
 					$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
-					if ($status != "hidden") { // supresses instances that are marked as hidden (includes overflow classes and mis-configured classes)
 					// var_dump($date_info);
 					$classdate = strptime($d, '%Y-%m-%d');
 					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
@@ -90,7 +92,6 @@ if ( post_password_required() ) {
 							echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
 						}
 						echo '</div>';
-					}
 				} ?>
 				<p>&nbsp;</p>
 				</div>
@@ -99,17 +100,17 @@ if ( post_password_required() ) {
 			<?php
 
 			/**
-			 * Hook: woocommerce_single_product_summary.
-			 *
-			 * @hooked woocommerce_template_single_title - 5
-			 * @hooked woocommerce_template_single_rating - 10
-			 * @hooked woocommerce_template_single_price - 10
-			 * @hooked woocommerce_template_single_excerpt - 20
-			 * @hooked woocommerce_template_single_add_to_cart - 30
-			 * @hooked woocommerce_template_single_meta - 40
-			 * @hooked woocommerce_template_single_sharing - 50
-			 * @hooked WC_Structured_Data::generate_product_data() - 60
-			 */
+			* woocommerce_single_product_summary hook.
+			*
+			* @hooked woocommerce_template_single_title - 5
+			* @hooked woocommerce_template_single_rating - 10
+			* @hooked woocommerce_template_single_price - 10
+			* @hooked woocommerce_template_single_excerpt - 20
+			* @hooked woocommerce_template_single_add_to_cart - 30
+			* @hooked woocommerce_template_single_meta - 40
+			* @hooked woocommerce_template_single_sharing - 50
+			* @hooked WC_Structured_Data::generate_product_data() - 60
+			*/
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
 			do_action( 'woocommerce_single_product_summary' );
@@ -137,7 +138,7 @@ if ( post_password_required() ) {
 
 	<?php
 		/**
-		 * Hook: woocommerce_after_single_product_summary.
+		 * woocommerce_after_single_product_summary hook.
 		 *
 		 * @hooked woocommerce_output_product_data_tabs - 10
 		 * @hooked woocommerce_upsell_display - 15
@@ -155,6 +156,15 @@ $('.product-addon').each(function() {
   	input.attr('placeholder', name);
   	if (input[0]) {
   		$(this).addClass(inputclass);
+	}
+});
+$('.product-addon-first-name, .product-addon-last-name, .product-addon-email-address, .product-addon-phone').hide();
+$('input.addon-radio').change( function(){
+    if (this.checked && this.value == 'other-use-the-student-contact-information-below') {
+		$('.product-addon-first-name, .product-addon-last-name, .product-addon-email-address, .product-addon-phone').show();
+    }
+	if (this.checked && this.value == 'me-use-my-contact-information-to-enroll') {
+		$('.product-addon-first-name, .product-addon-last-name, .product-addon-email-address, .product-addon-phone').hide();
 	}
 });
 $('ul.variations').hide();
