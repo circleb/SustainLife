@@ -79,6 +79,7 @@ if ( post_password_required() ) {
 						$d = $date_info['date'];
 						$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
 						$display_status = $date_info['display_status']; // Text to display in the ribbon
+						$allow_standby = $date_info['allow_standby'];
 						// var_dump($date_info);
 						$classdate = strptime($d, '%Y-%m-%d');
 						$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
@@ -91,7 +92,9 @@ if ( post_password_required() ) {
 							echo '</time>';
 							if ($status == 'unavail') {
 								echo '<div class="ribbon both_ribbon"><span>'.$display_status.'</span></div>';
-								echo '<button class="button tiny standby-button" data-open="sbModal" data-timestamp="' . $d2 . '">Request Standby</button>';
+								if ($allow_standby) {
+									echo '<button class="button tiny standby-button" data-open="sbModal" data-timestamp="' . $d2 . '">Request Standby</button>';
+								}
 							} else {
 								echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
 							}
