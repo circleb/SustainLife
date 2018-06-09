@@ -93,6 +93,12 @@ if ( post_password_required() ) {
 							echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
 						}
 						echo '</div>';
+						
+						// Add empty div if only one item to display
+						if (count($dates) == 1) {
+							echo '<div class="class-calendar-block ribbon-container">';
+							echo '</div>';
+						}
 				} ?>
 				<p>&nbsp;</p>
 				</div>
