@@ -105,6 +105,7 @@ if ( post_password_required() ) {
 					} ?>
 					<p>&nbsp;</p>
 					</div>
+					<br/>
 
 <?php
 				}
