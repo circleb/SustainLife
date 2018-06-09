@@ -68,41 +68,87 @@ if ( post_password_required() ) {
 			$dates = slfe_fetch_available_class_dates($id, true);
 			// var_dump($dates);
 
-			if (count($dates)) { ?>
-				<h4>Choose Class Date</h4>
-				<div class="class-calendar">
-				<?php
-				foreach ($dates as $date_info) {
-					$d = $date_info['date'];
-					$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
-					$display_status = $date_info['display_status']; // Text to display in the ribbon
-					// var_dump($date_info);
-					$classdate = strptime($d, '%Y-%m-%d');
-					$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
-					$d2 = date('m/d/Y',$timestamp);
-						echo '<div class="class-calendar-block ribbon-container">';
-						echo '<time class="date-icon ' . $status . '" data-timestamp="' . $d . '">';
-						echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
-						echo '<span class="day">' . date('d',$timestamp) . '</span>';
-						echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
-						echo '</time>';
-						if ($status == 'unavail') {
-							echo '<div class="ribbon both_ribbon"><span>'.$display_status.'</span></div>';
-							echo '<button class="button tiny standby-button" data-open="sbModal" data-timestamp="' . $d2 . '">Request Standby</button>';
-						} else {
-							echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
-						}
-						echo '</div>';
+			$dates = 
+						array (
+						  0 => 
+						  array (
+						    'date' => '2018-05-17',
+						    'status' => 'unavail',
+						    'display_status' => 'Closed',
+						  ),
+						  1 => 
+						  array (
+						    'date' => '2018-06-21',
+						    'status' => 'unavail',
+						    'display_status' => 'Full',
+						  ),
+						  2 => 
+						  array (
+						    'date' => '2018-07-12',
+						    'status' => 'unavail',
+						    'display_status' => 'Full',
+						  ),
+						  3 => 
+						  array (
+						    'date' => '2018-08-16',
+						    'status' => 'unavail',
+						    'display_status' => 'Full',
+						  ),
+						  4 => 
+						  array (
+						    'date' => '2018-11-01',
+						    'status' => 'unavail',
+						    'display_status' => 'Full',
+						  ),
+						  5 => 
+						  array (
+						    'date' => '2019-01-17',
+						    'status' => 'avail',
+						    'display_status' => 'Open',
+						  ),
+						);
+			$rows = array_chunk( $dates, 3 ); // Break the array of dates into rows of at most 3 items per row
 						
-						// Add empty div if only one item to display
-						if (count($dates) == 1) {
+			if (count($rows)) { ?>
+				<h4>Choose Class Date</h4>
+				<?php
+				foreach ($rows as $dates) {
+					echo '<div class="class-calendar">'."\n";
+					foreach ($dates as $date_info) {
+						$d = $date_info['date'];
+						$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
+						$display_status = $date_info['display_status']; // Text to display in the ribbon
+						// var_dump($date_info);
+						$classdate = strptime($d, '%Y-%m-%d');
+						$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
+						$d2 = date('m/d/Y',$timestamp);
 							echo '<div class="class-calendar-block ribbon-container">';
-							echo '</div>';
-						}
-				} ?>
-				<p>&nbsp;</p>
-				</div>
-			<?php } ?>
+							echo '<time class="date-icon ' . $status . '" data-timestamp="' . $d . '">';
+							echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
+							echo '<span class="day">' . date('d',$timestamp) . '</span>';
+							echo '<span class="year">' . date('M Y',$timestamp) . '</span>';
+							echo '</time>';
+							if ($status == 'unavail') {
+								echo '<div class="ribbon both_ribbon"><span>'.$display_status.'</span></div>';
+								echo '<button class="button tiny standby-button" data-open="sbModal" data-timestamp="' . $d2 . '">Request Standby</button>';
+							} else {
+								echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
+							}
+							echo "</div>\n\n";
+							
+							// Add empty div if only one item to display
+							if (count($dates) == 1) {
+								echo '<div class="class-calendar-block ribbon-container">';
+								echo "</div>\n\n";
+							}
+					} ?>
+					<p>&nbsp;</p>
+					</div>
+
+<?php
+				}
+			} 
+?>
 		<div class="reveal" id="atcModal" data-reveal>
 			<?php
 
