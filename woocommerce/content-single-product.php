@@ -68,45 +68,6 @@ if ( post_password_required() ) {
 			$dates = slfe_fetch_available_class_dates($id, true);
 			// var_dump($dates);
 
-			$dates = 
-						array (
-						  0 => 
-						  array (
-						    'date' => '2018-05-17',
-						    'status' => 'unavail',
-						    'display_status' => 'Closed',
-						  ),
-						  1 => 
-						  array (
-						    'date' => '2018-06-21',
-						    'status' => 'unavail',
-						    'display_status' => 'Full',
-						  ),
-						  2 => 
-						  array (
-						    'date' => '2018-07-12',
-						    'status' => 'unavail',
-						    'display_status' => 'Full',
-						  ),
-						  3 => 
-						  array (
-						    'date' => '2018-08-16',
-						    'status' => 'unavail',
-						    'display_status' => 'Full',
-						  ),
-						  4 => 
-						  array (
-						    'date' => '2018-11-01',
-						    'status' => 'unavail',
-						    'display_status' => 'Full',
-						  ),
-						  5 => 
-						  array (
-						    'date' => '2019-01-17',
-						    'status' => 'avail',
-						    'display_status' => 'Open',
-						  ),
-						);
 			$rows = array_chunk( $dates, 3 ); // Break the array of dates into rows of at most 3 items per row
 						
 			if (count($rows)) { ?>
