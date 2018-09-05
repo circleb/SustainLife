@@ -19,7 +19,7 @@
 			</footer>
 			<footer class="sub-footer">
 				<div class="foot-content">
-					© 2017 Ploughshare Institute for Sustainable Culture. All rights reserved.
+					&copy; <?php echo date("Y"); ?> Ploughshare Institute for Sustainable Culture. All rights reserved.
 				</div>
 			</footer>
 		</div>
