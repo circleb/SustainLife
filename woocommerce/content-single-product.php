@@ -75,6 +75,7 @@ if ( post_password_required() ) {
 				<?php
 				foreach ($rows as $dates) {
 					echo '<div class="class-calendar">'."\n";
+					$num_dates_shown = 0;
 					foreach ($dates as $date_info) {
 						$d = $date_info['date'];
 						$status = $date_info['status']; // Sets the class below. Values are: 'avail' or 'unavail'
@@ -84,6 +85,9 @@ if ( post_password_required() ) {
 						$classdate = strptime($d, '%Y-%m-%d');
 						$timestamp = mktime(0, 0, 0, $classdate['tm_mon']+1, $classdate['tm_mday'], $classdate['tm_year']+1900);
 						$d2 = date('m/d/Y',$timestamp);
+						if ($status == 'hidden') {
+							// Skip hidden classes
+						} else {
 							echo '<div class="class-calendar-block ribbon-container">';
 							echo '<time class="date-icon ' . $status . '" data-timestamp="' . $d . '">';
 							echo '<strong class="month">' . date('l',$timestamp) . '</strong>';
@@ -99,13 +103,16 @@ if ( post_password_required() ) {
 								echo '<button class="button tiny register-button" data-open="atcModal" data-timestamp="' . $d . '">Register Now</button>';
 							}
 							echo "</div>\n\n";
-							
-							// Add empty div if only one item to display
-							if (count($dates) == 1) {
-								echo '<div class="class-calendar-block ribbon-container">';
-								echo "</div>\n\n";
-							}
-					} ?>
+							$num_dates_shown++;
+						}
+
+					} 
+					// Add empty div if only one item was displayed
+					if ($num_dates_shown == 1) {
+						echo '<div class="class-calendar-block ribbon-container">';
+						echo "</div>\n\n";
+					}
+					?>
 					<p>&nbsp;</p>
 					</div>
 					<br/>
