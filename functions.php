@@ -55,7 +55,12 @@ require_once( 'library/responsive-images.php' );
 require_once( 'library/woocommerce.php' );
 
 /** Configure Visual Composer Shortcodes */
-require_once( 'library/visualcomposer.php' );
+/* require_once( 'library/visualcomposer.php' ); mpressly - removed on 10/23/2020 */
 
 /** If your site requires protocol relative url's for theme assets, uncomment the line below */
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
+
+/*
+ * ADD BANNER TO TOP OF WEBSITE - mpressly
+ * Source: https://wpsites.net/web-design/add-banner-before-header/
+ */
