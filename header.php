@@ -39,6 +39,9 @@
 	<?php do_action( 'foundationpress_layout_start' ); ?>
 
 	<header class="site-header" role="banner">
+		<div style="padding-top: 15px; padding-bottom: 15px; padding-left: 50px; padding-right: 50px; font-weight: bold; color: white; background: #177E89; font-size: 18px; text-align: center;">
+<a href="https://www.sustainlife.org/scheduled-classes/">Exciting News: Ploughshare classes and the Homestead Craft Village have reopened. [Read more]</a>
+		</div>		
 		<div class="site-title-bar title-bar" <?php foundationpress_title_bar_responsive_toggle() ?>>
 			<div class="title-bar-left">
 				<button class="menu-icon" type="button" data-toggle="<?php foundationpress_mobile_menu_id(); ?>"></button>
