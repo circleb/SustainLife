@@ -30,7 +30,7 @@ global $product;
 		// do_action( 'woocommerce_after_add_to_cart_quantity' );
 	?>
 	<p>
-		<strong>Is this a gift?</strong> Please contact us before you place your order if this gift is a surprise and you don't want us to notify the recipient.
+		<strong>Is this a gift?</strong> If so, please enter your email address instead of the recipient's if this gift is a surprise and you don't want us to notify the recipient.
 	</p>
 	<hr class="sl-divider" />
 	<button type="submit" class="single_add_to_cart_button button alt expanded brown"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
