@@ -39,8 +39,9 @@
 	<?php do_action( 'foundationpress_layout_start' ); ?>
 
 	<header class="site-header" role="banner">
-		<div style="padding-top: 15px; padding-bottom: 15px; padding-left: 50px; padding-right: 50px; font-weight: bold; color: white; background: #177E89; font-size: 18px; text-align: center;">
-        <?php echo do_shortcode("[banner]"); ?>
+	<?php //
+		  // <div style="padding-top: 15px; padding-bottom: 15px; padding-left: 50px; padding-right: 50px; font-weight: bold; color: white; background: #177E89; font-size: 18px; text-align: center;">
+       ?><?php // echo do_shortcode("[banner]"); ?>
 		</div>		
 		<div class="site-title-bar title-bar" <?php foundationpress_title_bar_responsive_toggle() ?>>
 			<div class="title-bar-left">
